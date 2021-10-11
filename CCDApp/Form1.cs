@@ -82,21 +82,26 @@ namespace CCDApp
         private void FormExit(object sender, FormClosingEventArgs e)
         {
             CamInterface.Terminate();
-            Environment.Exit(0);
-        }
+            //Application.ExitThread();
+            //Environment.Exit(Environment.ExitCode);
 
+        }
         private void captureButton_Click(object sender, EventArgs e)
         {
             captureButton.Enabled = false;
             stopCaptureButton.Enabled = true;
-            CamInterface.StartFrameGrab(1000);
+            CamInterface.StartFrameGrab(0x8888);
         }
-
         private void stopCaptureButton_Click(object sender, EventArgs e)
         {
             captureButton.Enabled = true;
             stopCaptureButton.Enabled = false;
             CamInterface.StopFrameGrab();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

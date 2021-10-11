@@ -49,6 +49,8 @@
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.stopCaptureButton = new System.Windows.Forms.Button();
+            this.captureButton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -56,13 +58,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.captureButton = new System.Windows.Forms.Button();
-            this.stopCaptureButton = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.ModeContainer.SuspendLayout();
             this.ModeFlowContainer.SuspendLayout();
             this.ResolutionContainer.SuspendLayout();
@@ -75,10 +75,10 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.flowLayoutPanel6.SuspendLayout();
-            this.flowLayoutPanel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.flowLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // init
@@ -141,6 +141,7 @@
             // CameraModeContinuous
             // 
             this.CameraModeContinuous.AutoSize = true;
+            this.CameraModeContinuous.Checked = true;
             this.CameraModeContinuous.Location = new System.Drawing.Point(3, 3);
             this.CameraModeContinuous.Name = "CameraModeContinuous";
             this.CameraModeContinuous.Size = new System.Drawing.Size(78, 17);
@@ -157,7 +158,6 @@
             this.CameraModeTrigger.Name = "CameraModeTrigger";
             this.CameraModeTrigger.Size = new System.Drawing.Size(58, 17);
             this.CameraModeTrigger.TabIndex = 10;
-            this.CameraModeTrigger.TabStop = true;
             this.CameraModeTrigger.Text = "Trigger";
             this.CameraModeTrigger.UseVisualStyleBackColor = true;
             this.CameraModeTrigger.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
@@ -181,6 +181,8 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 6;
+            this.comboBox1.Text = "1280x960";
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // ExposureTimeContainer
             // 
@@ -204,6 +206,7 @@
             this.ExposureTimeInput.Name = "ExposureTimeInput";
             this.ExposureTimeInput.Size = new System.Drawing.Size(263, 45);
             this.ExposureTimeInput.TabIndex = 8;
+            this.ExposureTimeInput.Value = 15;
             // 
             // ExposureTimeOoM
             // 
@@ -218,6 +221,7 @@
             this.ExposureTimeOoM.Name = "ExposureTimeOoM";
             this.ExposureTimeOoM.Size = new System.Drawing.Size(52, 21);
             this.ExposureTimeOoM.TabIndex = 12;
+            this.ExposureTimeOoM.Text = "100ms";
             // 
             // ExposureTimeFlowContainer
             // 
@@ -246,6 +250,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(52, 20);
             this.textBox1.TabIndex = 13;
+            this.textBox1.Text = "8dB";
             // 
             // trackBar1
             // 
@@ -255,6 +260,7 @@
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(263, 45);
             this.trackBar1.TabIndex = 7;
+            this.trackBar1.Value = 20;
             // 
             // flowLayoutPanel5
             // 
@@ -316,6 +322,26 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Camera Settings";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // stopCaptureButton
+            // 
+            this.stopCaptureButton.Location = new System.Drawing.Point(87, 256);
+            this.stopCaptureButton.Name = "stopCaptureButton";
+            this.stopCaptureButton.Size = new System.Drawing.Size(75, 23);
+            this.stopCaptureButton.TabIndex = 17;
+            this.stopCaptureButton.Text = "Stop Capture";
+            this.stopCaptureButton.UseVisualStyleBackColor = true;
+            this.stopCaptureButton.Click += new System.EventHandler(this.stopCaptureButton_Click);
+            // 
+            // captureButton
+            // 
+            this.captureButton.Location = new System.Drawing.Point(6, 256);
+            this.captureButton.Name = "captureButton";
+            this.captureButton.Size = new System.Drawing.Size(75, 23);
+            this.captureButton.TabIndex = 16;
+            this.captureButton.Text = "Capture";
+            this.captureButton.UseVisualStyleBackColor = true;
+            this.captureButton.Click += new System.EventHandler(this.captureButton_Click);
             // 
             // tabPage2
             // 
@@ -383,72 +409,52 @@
             this.textBox2.Size = new System.Drawing.Size(100, 20);
             this.textBox2.TabIndex = 0;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1280, 760);
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
-            // 
             // flowLayoutPanel6
             // 
             this.flowLayoutPanel6.AutoSize = true;
             this.flowLayoutPanel6.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel6.Controls.Add(this.flowLayoutPanel1);
-            this.flowLayoutPanel6.Controls.Add(this.flowLayoutPanel7);
+            this.flowLayoutPanel6.Controls.Add(this.flowLayoutPanel3);
             this.flowLayoutPanel6.Location = new System.Drawing.Point(12, 12);
             this.flowLayoutPanel6.Name = "flowLayoutPanel6";
             this.flowLayoutPanel6.Padding = new System.Windows.Forms.Padding(5);
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(1674, 1002);
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(894, 1028);
             this.flowLayoutPanel6.TabIndex = 6;
-            // 
-            // flowLayoutPanel7
-            // 
-            this.flowLayoutPanel7.AutoSize = true;
-            this.flowLayoutPanel7.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanel7.Controls.Add(this.pictureBox1);
-            this.flowLayoutPanel7.Controls.Add(this.pictureBox2);
-            this.flowLayoutPanel7.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel7.Location = new System.Drawing.Point(380, 8);
-            this.flowLayoutPanel7.Name = "flowLayoutPanel7";
-            this.flowLayoutPanel7.Size = new System.Drawing.Size(1286, 986);
-            this.flowLayoutPanel7.TabIndex = 6;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.pictureBox2.Location = new System.Drawing.Point(3, 769);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(290, 214);
-            this.pictureBox2.TabIndex = 6;
-            this.pictureBox2.TabStop = false;
             // 
             // folderBrowserDialog1
             // 
             this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.MyDocuments;
             this.folderBrowserDialog1.HelpRequest += new System.EventHandler(this.folderBrowserDialog1_HelpRequest);
             // 
-            // captureButton
+            // pictureBox1
             // 
-            this.captureButton.Location = new System.Drawing.Point(6, 256);
-            this.captureButton.Name = "captureButton";
-            this.captureButton.Size = new System.Drawing.Size(75, 23);
-            this.captureButton.TabIndex = 16;
-            this.captureButton.Text = "Capture";
-            this.captureButton.UseVisualStyleBackColor = true;
-            this.captureButton.Click += new System.EventHandler(this.captureButton_Click);
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(500, 500);
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
             // 
-            // stopCaptureButton
+            // pictureBox2
             // 
-            this.stopCaptureButton.Location = new System.Drawing.Point(87, 256);
-            this.stopCaptureButton.Name = "stopCaptureButton";
-            this.stopCaptureButton.Size = new System.Drawing.Size(75, 23);
-            this.stopCaptureButton.TabIndex = 17;
-            this.stopCaptureButton.Text = "Stop Capture";
-            this.stopCaptureButton.UseVisualStyleBackColor = true;
-            this.stopCaptureButton.Click += new System.EventHandler(this.stopCaptureButton_Click);
+            this.pictureBox2.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.pictureBox2.Location = new System.Drawing.Point(3, 509);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(500, 500);
+            this.pictureBox2.TabIndex = 6;
+            this.pictureBox2.TabStop = false;
+            // 
+            // flowLayoutPanel3
+            // 
+            this.flowLayoutPanel3.AutoSize = true;
+            this.flowLayoutPanel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanel3.Controls.Add(this.pictureBox1);
+            this.flowLayoutPanel3.Controls.Add(this.pictureBox2);
+            this.flowLayoutPanel3.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(380, 8);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(506, 1012);
+            this.flowLayoutPanel3.TabIndex = 7;
             // 
             // CCDAppMain
             // 
@@ -457,10 +463,10 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1354, 460);
+            this.ClientSize = new System.Drawing.Size(1181, 767);
             this.Controls.Add(this.flowLayoutPanel6);
             this.Name = "CCDAppMain";
-            this.Text = "CCD Controller for Science";
+            this.Text = "Multiple CCD Controller";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormExit);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ModeContainer.ResumeLayout(false);
@@ -482,11 +488,11 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.flowLayoutPanel6.ResumeLayout(false);
             this.flowLayoutPanel6.PerformLayout();
-            this.flowLayoutPanel7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.flowLayoutPanel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -507,11 +513,8 @@
         private System.Windows.Forms.TrackBar ExposureTimeInput;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
         private System.Windows.Forms.TrackBar trackBar1;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
         private System.Windows.Forms.ComboBox ExposureTimeOoM;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel7;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.GroupBox GainContainer;
         private System.Windows.Forms.FlowLayoutPanel ModeFlowContainer;
         private System.Windows.Forms.RadioButton CameraModeTrigger;
@@ -529,6 +532,9 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button captureButton;
         private System.Windows.Forms.Button stopCaptureButton;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
     }
 }
 

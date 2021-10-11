@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace CCDApp
@@ -48,12 +49,11 @@ namespace CCDApp
                     //success
                     modelNumber = moduleNoRtn.ToString();
                     serialNumber = serialNoRtn.ToString();
-                    Console.WriteLine(String.Format("CCD{0} Initialized",idx));
+                    Console.WriteLine(String.Format("CCD{0} {1}{2} Initialized",idx,GetModelNumber(),GetSerialNumber()));
                     break;
                 default:
                     break;
             }
-
         }
 
         public bool ActivateDevice()
@@ -189,6 +189,14 @@ namespace CCDApp
             return serialNumber;
         }
 
+        public void UpdateCamera()
+        {
+            UpdateResolution();
+            UpdateStartPosition();
+            UpdateExposureTime();
+            UpdateGain();
+        }
+
         #region Camera Specific DLL
 
         //The module number and serial number are what appear if one calls the
@@ -264,14 +272,18 @@ namespace CCDApp
         [FieldOffset(64)] public int ProcessFrameType;
         [FieldOffset(68)] public int tFilterAcceptForFile;
     }
+
     public delegate void FrameCallbackDelegate(ref ImageProperty frameProperty, IntPtr BufferPtr);
+
     public class USBCamInterface
     {
+        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
+        public static extern bool DeleteObject(IntPtr hObject);
+
         private int numDevices = 0;
 
         private string[] moduleNumbers;
         private string[] serialNumbers;
-        private bool[] workingSet; //currently active cameras
         private bool engineRunning = false; //currently active engines
 
         private IntPtr windowHandle;
@@ -282,11 +294,26 @@ namespace CCDApp
         private enum CAMERA_BIT { BIT_8_CAMERA = 8, BIT_12_CAMERA = 12 };
         PictureBox[] p;
 
+        private ColorPalette palette;
         public USBCamInterface(IntPtr handle, PictureBox[] ps)
         {
             p = ps;
             windowHandle = handle;
             frameDelegate = new FrameCallbackDelegate(FrameCallback);
+            palette = CalculateGreyscalePalette();
+        }
+
+        private ColorPalette CalculateGreyscalePalette() //from https://stackoverflow.com/questions/8603596/how-can-i-define-a-8-bit-grayscale-image-directly
+        {
+            Bitmap bmp = new Bitmap(1, 1, PixelFormat.Format8bppIndexed);
+            ColorPalette p = bmp.Palette;
+
+            Color[] entries = p.Entries;
+            for (int i = 0; i < 256; i++)
+            {
+                entries[i] = Color.FromArgb(i, i, i);
+            }
+            return p;
         }
 
           /****************/
@@ -322,6 +349,13 @@ namespace CCDApp
             Console.WriteLine(String.Format("{0} Devices Initialized",numDevices));
             StartEngine();
             
+
+            for(int i = 0; i < numDevices; i++)
+            {
+                CCDCameras[i].UpdateCamera();
+            }
+
+            
         }
         public bool Terminate()
         {
@@ -338,8 +372,7 @@ namespace CCDApp
             numDevices = 0;
             return true;
         }
-
-
+        
         public bool StartEngine()
         {
             if (!engineRunning)
@@ -371,14 +404,15 @@ namespace CCDApp
         public void StartFrameGrab(int totalFrames)
         {
             //BufInstallFrameHooker( 0, frameDelegate); //Raw data.
-            BufInstallFrameHooker(1, frameDelegate); // BMP data
-            BufStartFrameGrab(totalFrames);
+            int fh = BufInstallFrameHooker(1, frameDelegate); // BMP data
+            int fg = BufStartFrameGrab(totalFrames);
+            Console.WriteLine(String.Format("Starting Frame Grab. {2} Frames. {0} {1}", fh, fh, totalFrames));
         }
         public void StopFrameGrab()
         {
             // Install frame call back.
-            BufInstallFrameHooker(0, null); // Unhooker the callback.
-            BufStopFrameGrab();
+            int fh = BufInstallFrameHooker(1, null); // BMP data
+            Console.WriteLine(String.Format("Stopping Frame Grab {0}", fh));
         }
         
 
@@ -403,44 +437,88 @@ namespace CCDApp
           /*************************************/
          //Memory Mangment & Buffer Processing//
         /*************************************/
-        public void AllocImageMem()
+        public IntPtr AllocImageMem(int size)
         {
-            imagePointer = Marshal.AllocHGlobal(12*1920*1080);
+            return Marshal.AllocHGlobal(size);
         }
-        public void FreeImageMem()
+        public void FreeImageMem(IntPtr image)
         {
             if (imagePointer != IntPtr.Zero)
             {
-                Marshal.FreeHGlobal(imagePointer);
+                Marshal.FreeHGlobal(image);
             }
         }
         public void FrameCallback( ref ImageProperty imgProperty, IntPtr bufferPtr)
         {
-            int id = imgProperty.CameraID;
-            int height = imgProperty.Column;
-            int width = imgProperty.Row;
-            Console.WriteLine("Image Device:{0} {1}x{2}",id, height, width);
-
-            Bitmap bmp = new Bitmap(width, height, 1280,PixelFormat.Format8bppIndexed, bufferPtr);
-
-            drawFrame(id-1, bmp);
+            int id = imgProperty.CameraID-1;
+            int width = imgProperty.Column;
+            int height = imgProperty.Row;
+            Console.WriteLine("Image Device:{0} {1}x{2}",id, width, height);
+            
+            Bitmap bmp = new Bitmap(width, height, width,PixelFormat.Format8bppIndexed, bufferPtr);
+            bmp.Palette = palette;
+            drawFrame(id, bmp);
+            //bmp.Dispose();
         }
         public void drawFrame(int id, Bitmap data)
         {
-            p[id].Image = Image.FromHbitmap(data.GetHbitmap());
-            data.Dispose();
+            IntPtr hBitmap = data.GetHbitmap();
+            try
+            {
+                Bitmap image = Image.FromHbitmap(hBitmap);
+                image.Palette = palette; //remap the colors to 0-255 greyscale
+
+                //Find the largest size we can make our image to fit the box, then crop the box to that size
+                Size newSize = FindCommonSize(image.Size, p[id].Size);
+
+                p[id].Size = newSize;
+                p[id].Image = new Bitmap(image, newSize);
+                
+                image.Dispose();
+                data.Dispose();
+
+                GC.Collect();
+            }
+            finally
+            {
+                DeleteObject(hBitmap); //Very important otherwise massive memory leak
+            }
         }
 
-          /******/
-         //Info//
+        private Size FindCommonSize(Size s1, Size s2)
+        {
+
+            //need to resize the image so it always fits in the frame, regardless of the frame aspect ratio
+            //if frame AR > image AR then we are bound by height
+            //if frame AR < image AR then we are bound by width
+
+            double aspectRatio = (double)s1.Width / (double)s1.Height;
+
+            double aspectRatioFrame = (double)s2.Width / (double)s2.Height;
+
+            Size newSize = new Size();
+            if (aspectRatioFrame > aspectRatio)
+            {
+                newSize.Height = s2.Height;
+                newSize.Width = (int)Math.Round(s2.Height * aspectRatio);
+            }
+            else
+            {
+                newSize.Width = s2.Width;
+                newSize.Height = (int)Math.Round((double)s2.Width / aspectRatio);
+            }
+            return newSize;
+
+        }
+
+
+
+        /******/
+        //Info//
         /******/
         public int getNumCameras()
         {
             return numDevices;
-        }
-        public bool[] getWorkingSet()
-        {
-            return workingSet;
         }
         public string[] getDevices()
         {
