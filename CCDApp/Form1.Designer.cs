@@ -38,12 +38,15 @@
             this.ResolutionContainer = new System.Windows.Forms.GroupBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.ExposureTimeContainer = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.exposureTimeOoMControl = new System.Windows.Forms.NumericUpDown();
+            this.exposureTimeFineControl = new System.Windows.Forms.NumericUpDown();
             this.ExposureTimeInput = new System.Windows.Forms.TrackBar();
-            this.ExposureTimeOoM = new System.Windows.Forms.ComboBox();
             this.ExposureTimeFlowContainer = new System.Windows.Forms.FlowLayoutPanel();
             this.GainContainer = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.gainControl = new System.Windows.Forms.NumericUpDown();
+            this.gainControlInput = new System.Windows.Forms.TrackBar();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
@@ -52,33 +55,32 @@
             this.stopCaptureButton = new System.Windows.Forms.Button();
             this.captureButton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.captureSettingsFlowContainer = new System.Windows.Forms.FlowLayoutPanel();
             this.ModeContainer.SuspendLayout();
             this.ModeFlowContainer.SuspendLayout();
             this.ResolutionContainer.SuspendLayout();
             this.ExposureTimeContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.exposureTimeOoMControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.exposureTimeFineControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ExposureTimeInput)).BeginInit();
             this.GainContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gainControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gainControlInput)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.flowLayoutPanel6.SuspendLayout();
+            this.flowLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.flowLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // init
@@ -187,41 +189,86 @@
             // ExposureTimeContainer
             // 
             this.ExposureTimeContainer.AutoSize = true;
+            this.ExposureTimeContainer.Controls.Add(this.label2);
+            this.ExposureTimeContainer.Controls.Add(this.label1);
+            this.ExposureTimeContainer.Controls.Add(this.exposureTimeOoMControl);
+            this.ExposureTimeContainer.Controls.Add(this.exposureTimeFineControl);
             this.ExposureTimeContainer.Controls.Add(this.ExposureTimeInput);
-            this.ExposureTimeContainer.Controls.Add(this.ExposureTimeOoM);
             this.ExposureTimeContainer.Controls.Add(this.ExposureTimeFlowContainer);
             this.ExposureTimeContainer.Location = new System.Drawing.Point(6, 70);
             this.ExposureTimeContainer.Name = "ExposureTimeContainer";
-            this.ExposureTimeContainer.Size = new System.Drawing.Size(333, 83);
+            this.ExposureTimeContainer.Size = new System.Drawing.Size(333, 89);
             this.ExposureTimeContainer.TabIndex = 13;
             this.ExposureTimeContainer.TabStop = false;
             this.ExposureTimeContainer.Text = "Exposure Time";
             this.ExposureTimeContainer.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(312, 27);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(12, 13);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "s";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(240, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(33, 13);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "x 10^";
+            // 
+            // exposureTimeOoMControl
+            // 
+            this.exposureTimeOoMControl.BackColor = System.Drawing.SystemColors.Window;
+            this.exposureTimeOoMControl.Location = new System.Drawing.Point(275, 25);
+            this.exposureTimeOoMControl.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.exposureTimeOoMControl.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            -2147483648});
+            this.exposureTimeOoMControl.Name = "exposureTimeOoMControl";
+            this.exposureTimeOoMControl.Size = new System.Drawing.Size(35, 20);
+            this.exposureTimeOoMControl.TabIndex = 13;
+            this.exposureTimeOoMControl.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            -2147483648});
+            this.exposureTimeOoMControl.ValueChanged += new System.EventHandler(this.exposureTimeOoMControl_ValueChanged);
+            // 
+            // exposureTimeFineControl
+            // 
+            this.exposureTimeFineControl.Location = new System.Drawing.Point(199, 25);
+            this.exposureTimeFineControl.Name = "exposureTimeFineControl";
+            this.exposureTimeFineControl.Size = new System.Drawing.Size(39, 20);
+            this.exposureTimeFineControl.TabIndex = 12;
+            this.exposureTimeFineControl.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.exposureTimeFineControl.ValueChanged += new System.EventHandler(this.exposureTimeFineControl_ValueChanged);
+            // 
             // ExposureTimeInput
             // 
             this.ExposureTimeInput.BackColor = System.Drawing.Color.White;
-            this.ExposureTimeInput.Location = new System.Drawing.Point(6, 19);
-            this.ExposureTimeInput.Maximum = 50;
+            this.ExposureTimeInput.Location = new System.Drawing.Point(6, 25);
+            this.ExposureTimeInput.Maximum = 100;
             this.ExposureTimeInput.Name = "ExposureTimeInput";
-            this.ExposureTimeInput.Size = new System.Drawing.Size(263, 45);
+            this.ExposureTimeInput.Size = new System.Drawing.Size(187, 45);
             this.ExposureTimeInput.TabIndex = 8;
-            this.ExposureTimeInput.Value = 15;
-            // 
-            // ExposureTimeOoM
-            // 
-            this.ExposureTimeOoM.FormattingEnabled = true;
-            this.ExposureTimeOoM.Items.AddRange(new object[] {
-            "10ms",
-            "100ms",
-            "500ms",
-            "1s",
-            "10s"});
-            this.ExposureTimeOoM.Location = new System.Drawing.Point(275, 19);
-            this.ExposureTimeOoM.Name = "ExposureTimeOoM";
-            this.ExposureTimeOoM.Size = new System.Drawing.Size(52, 21);
-            this.ExposureTimeOoM.TabIndex = 12;
-            this.ExposureTimeOoM.Text = "100ms";
+            this.ExposureTimeInput.TickFrequency = 5;
+            this.ExposureTimeInput.Value = 50;
+            this.ExposureTimeInput.Scroll += new System.EventHandler(this.ExposureTimeInput_Scroll);
             // 
             // ExposureTimeFlowContainer
             // 
@@ -234,8 +281,8 @@
             // 
             // GainContainer
             // 
-            this.GainContainer.Controls.Add(this.textBox1);
-            this.GainContainer.Controls.Add(this.trackBar1);
+            this.GainContainer.Controls.Add(this.gainControl);
+            this.GainContainer.Controls.Add(this.gainControlInput);
             this.GainContainer.Controls.Add(this.flowLayoutPanel5);
             this.GainContainer.Location = new System.Drawing.Point(6, 165);
             this.GainContainer.Name = "GainContainer";
@@ -244,23 +291,40 @@
             this.GainContainer.TabStop = false;
             this.GainContainer.Text = "Gain";
             // 
-            // textBox1
+            // gainControl
             // 
-            this.textBox1.Location = new System.Drawing.Point(275, 19);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(52, 20);
-            this.textBox1.TabIndex = 13;
-            this.textBox1.Text = "8dB";
+            this.gainControl.Location = new System.Drawing.Point(244, 19);
+            this.gainControl.Maximum = new decimal(new int[] {
+            41,
+            0,
+            0,
+            0});
+            this.gainControl.Minimum = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
+            this.gainControl.Name = "gainControl";
+            this.gainControl.Size = new System.Drawing.Size(52, 20);
+            this.gainControl.TabIndex = 13;
+            this.gainControl.Value = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+            this.gainControl.ValueChanged += new System.EventHandler(this.gainControl_ValueChanged);
             // 
-            // trackBar1
+            // gainControlInput
             // 
-            this.trackBar1.BackColor = System.Drawing.Color.White;
-            this.trackBar1.Location = new System.Drawing.Point(6, 19);
-            this.trackBar1.Maximum = 50;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(263, 45);
-            this.trackBar1.TabIndex = 7;
-            this.trackBar1.Value = 20;
+            this.gainControlInput.BackColor = System.Drawing.Color.White;
+            this.gainControlInput.Location = new System.Drawing.Point(6, 19);
+            this.gainControlInput.Maximum = 41;
+            this.gainControlInput.Minimum = 6;
+            this.gainControlInput.Name = "gainControlInput";
+            this.gainControlInput.Size = new System.Drawing.Size(232, 45);
+            this.gainControlInput.TabIndex = 7;
+            this.gainControlInput.Value = 15;
+            this.gainControlInput.Scroll += new System.EventHandler(this.gainControlInput_Scroll);
             // 
             // flowLayoutPanel5
             // 
@@ -301,6 +365,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(3, 53);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -309,6 +374,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.tabPage1.Controls.Add(this.stopCaptureButton);
             this.tabPage1.Controls.Add(this.captureButton);
             this.tabPage1.Controls.Add(this.ModeContainer);
@@ -325,6 +391,7 @@
             // 
             // stopCaptureButton
             // 
+            this.stopCaptureButton.Enabled = false;
             this.stopCaptureButton.Location = new System.Drawing.Point(87, 256);
             this.stopCaptureButton.Name = "stopCaptureButton";
             this.stopCaptureButton.Size = new System.Drawing.Size(75, 23);
@@ -345,69 +412,24 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.button2);
-            this.tabPage2.Controls.Add(this.button1);
-            this.tabPage2.Controls.Add(this.textBox3);
-            this.tabPage2.Controls.Add(this.label2);
-            this.tabPage2.Controls.Add(this.label1);
-            this.tabPage2.Controls.Add(this.textBox2);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(352, 279);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Capture Settings";
+            this.tabPage2.Text = "Processing Settings";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // tabPage3
             // 
-            this.button2.Location = new System.Drawing.Point(158, 78);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(158, 44);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(52, 80);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 83);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "label2";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 49);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "label1";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(52, 46);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 0;
+            this.tabPage3.Controls.Add(this.captureSettingsFlowContainer);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(352, 279);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Capture Settings";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // flowLayoutPanel6
             // 
@@ -421,10 +443,17 @@
             this.flowLayoutPanel6.Size = new System.Drawing.Size(894, 1028);
             this.flowLayoutPanel6.TabIndex = 6;
             // 
-            // folderBrowserDialog1
+            // flowLayoutPanel3
             // 
-            this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.MyDocuments;
-            this.folderBrowserDialog1.HelpRequest += new System.EventHandler(this.folderBrowserDialog1_HelpRequest);
+            this.flowLayoutPanel3.AutoSize = true;
+            this.flowLayoutPanel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanel3.Controls.Add(this.pictureBox1);
+            this.flowLayoutPanel3.Controls.Add(this.pictureBox2);
+            this.flowLayoutPanel3.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(380, 8);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(506, 1012);
+            this.flowLayoutPanel3.TabIndex = 7;
             // 
             // pictureBox1
             // 
@@ -444,17 +473,24 @@
             this.pictureBox2.TabIndex = 6;
             this.pictureBox2.TabStop = false;
             // 
-            // flowLayoutPanel3
+            // saveFileDialog1
             // 
-            this.flowLayoutPanel3.AutoSize = true;
-            this.flowLayoutPanel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanel3.Controls.Add(this.pictureBox1);
-            this.flowLayoutPanel3.Controls.Add(this.pictureBox2);
-            this.flowLayoutPanel3.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(380, 8);
-            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(506, 1012);
-            this.flowLayoutPanel3.TabIndex = 7;
+            this.saveFileDialog1.AddExtension = false;
+            this.saveFileDialog1.CheckFileExists = true;
+            this.saveFileDialog1.FileName = "$name$__$imageNumber$.bmp";
+            this.saveFileDialog1.ValidateNames = false;
+            this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
+            // 
+            // captureSettingsFlowContainer
+            // 
+            this.captureSettingsFlowContainer.AutoSize = true;
+            this.captureSettingsFlowContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.captureSettingsFlowContainer.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.captureSettingsFlowContainer.Location = new System.Drawing.Point(6, 6);
+            this.captureSettingsFlowContainer.MinimumSize = new System.Drawing.Size(100, 100);
+            this.captureSettingsFlowContainer.Name = "captureSettingsFlowContainer";
+            this.captureSettingsFlowContainer.Size = new System.Drawing.Size(100, 100);
+            this.captureSettingsFlowContainer.TabIndex = 11;
             // 
             // CCDAppMain
             // 
@@ -476,23 +512,26 @@
             this.ResolutionContainer.ResumeLayout(false);
             this.ExposureTimeContainer.ResumeLayout(false);
             this.ExposureTimeContainer.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.exposureTimeOoMControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.exposureTimeFineControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ExposureTimeInput)).EndInit();
             this.GainContainer.ResumeLayout(false);
             this.GainContainer.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gainControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gainControlInput)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.flowLayoutPanel6.ResumeLayout(false);
             this.flowLayoutPanel6.PerformLayout();
+            this.flowLayoutPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.flowLayoutPanel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -512,9 +551,8 @@
         private System.Windows.Forms.FlowLayoutPanel ExposureTimeFlowContainer;
         private System.Windows.Forms.TrackBar ExposureTimeInput;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
-        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.TrackBar gainControlInput;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
-        private System.Windows.Forms.ComboBox ExposureTimeOoM;
         private System.Windows.Forms.GroupBox GainContainer;
         private System.Windows.Forms.FlowLayoutPanel ModeFlowContainer;
         private System.Windows.Forms.RadioButton CameraModeTrigger;
@@ -522,19 +560,19 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button captureButton;
         private System.Windows.Forms.Button stopCaptureButton;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
+        private System.Windows.Forms.NumericUpDown exposureTimeFineControl;
+        private System.Windows.Forms.NumericUpDown gainControl;
+        private System.Windows.Forms.NumericUpDown exposureTimeOoMControl;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.FlowLayoutPanel captureSettingsFlowContainer;
     }
 }
 

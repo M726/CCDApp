@@ -8,270 +8,6 @@ using System.Windows.Forms;
 
 namespace CCDApp
 {
-    public class CCDCamera
-    {
-        private int idx; //1,2,...
-        private int row = 1280;
-        private int column = 960;
-        private int bin = 0;
-        private int xStart = 0;
-        private int yStart = 0;
-        private int exposureTime = 5000; //250ms
-        private int redGain = 0;
-        private int greenGain = 16;
-        private int blueGain = 0;
-        private int mode = 0; //Raw or BMP
-
-        private bool active = false;
-        private string modelNumber;
-        private string serialNumber;
-        /*****************/
-        //Device Settings//
-        /*****************/
-        public CCDCamera(int cameraID)
-        {
-            idx = cameraID;
-            //uint addDeviceToWorkingSet = BufAddDeviceToWorkingSet(i);
-            StringBuilder moduleNoRtn = new StringBuilder();
-            StringBuilder serialNoRtn = new StringBuilder();
-
-            switch (BufGetModuleNoSerialNo(idx, moduleNoRtn, serialNoRtn))
-            {
-                case -1:
-                    //function failed - invalid device id
-                    Console.WriteLine(String.Format("Init Failed: Invalid Device ID. Device {0}. BufGetModuleNoSerialNo: -1", idx));
-                    break;
-                case -2:
-                    //function failed - engine started already
-                    Console.WriteLine(String.Format("Init Failed: Engine Started Already. Device {0}. BufGetModuleNoSerialNo: -2", idx));
-                    break;
-                case 1:
-                    //success
-                    modelNumber = moduleNoRtn.ToString();
-                    serialNumber = serialNoRtn.ToString();
-                    Console.WriteLine(String.Format("CCD{0} {1}{2} Initialized",idx,GetModelNumber(),GetSerialNumber()));
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        public bool ActivateDevice()
-        {
-            if (!active)
-            {
-                if (BufAddDeviceToWorkingSet(idx) > 0)
-                {
-                    active = true;
-                    return true;
-                }
-            }
-            return false;
-        }
-        public bool DeactivateDevice()
-        {
-            if (active)
-            {
-                if (BufRemoveDeviceFromWorkingSet(idx) > 0)
-                {
-                    active = false;
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public void SetContinuousMode(bool continuous)
-        {
-            if (continuous)
-            {
-                mode = 0;
-            }
-            else
-            {
-                mode = 1;
-            }
-            UpdateMode();
-        }
-        public void SetResolution(int height, int width, int binMode)
-        {
-            //width = row size
-            row = width;
-            column = height;
-            bin = binMode;
-
-            UpdateResolution();
-        }
-        public void SetStartPosition(int x, int y)
-        {
-            xStart = x;
-            yStart = y;
-            UpdateStartPosition();
-        }
-        public void SetGain(int gain)
-        {
-            if (gain > 41)
-                gain = 41;
-            if (gain < 6)
-                gain = 6;
-
-            redGain = gain;
-            greenGain = gain;
-            blueGain = gain;
-
-            UpdateGain();
-        }
-        public void SetExposureTime(double expTime)
-        {
-
-            //from 50us to 200,000ms mapped onto 1-4,000,000
-            //increase of 1 = 50us
-            int mappedExposureTime = (int)Math.Round(20.0 * expTime);
-            exposureTime = mappedExposureTime;
-            UpdateExposureTime();
-        }
-
-        public void UpdateMode()
-        {
-            BufSetCameraWorkMode(idx, mode);
-        }
-        public void UpdateResolution()
-        {
-            BufSetCustomizedResolution(idx, row, column, bin, 4);
-        }
-        public void UpdateStartPosition()
-        {
-            BufSetStartPosition(idx, xStart, yStart);
-        }
-        public void UpdateGain()
-        {
-            BufSetGains(idx, redGain, greenGain, blueGain);
-        }
-        public void UpdateExposureTime()
-        {
-            BufSetExposureTime(idx, exposureTime);
-        }
-
-        public int GetMode()
-        {
-            return mode;
-        }
-        public int GetHeight()
-        {
-            return column;
-        }
-        public int GetWidth()
-        {
-            return row;
-        }
-        public int GetXStart()
-        {
-            return xStart;
-        }
-        public int GetYStart()
-        {
-            return yStart;
-        }
-        public int GetGain()
-        {
-            return greenGain;
-        }
-        public double GetExposureTime()
-        {
-            return 0.05 * (double)exposureTime;
-        }
-        public string GetModelNumber()
-        {
-            return modelNumber;
-        }
-        public string GetSerialNumber()
-        {
-            return serialNumber;
-        }
-
-        public void UpdateCamera()
-        {
-            UpdateResolution();
-            UpdateStartPosition();
-            UpdateExposureTime();
-            UpdateGain();
-        }
-
-        #region Camera Specific DLL
-
-        //The module number and serial number are what appear if one calls the
-        //SDK_HANDLE_API BUFCCDUSB_ShowOpenDeviceDialog() method.
-        //returns:  -1 If the function fails (e.g. invalid device handle), 1 if the call succeeds.
-        [DllImport("BUF_USBCCDCamera_SDK_Stdcall.dll", EntryPoint = "BUFCCDUSB_GetModuleNoSerialNo", CallingConvention = CallingConvention.StdCall)]
-        private static extern int BufGetModuleNoSerialNo(int deviceID, StringBuilder moduleNo, StringBuilder serialNo);
-
-
-        //Add device to working set, deviceID is a one base index, so if InitDevice returns 2 for example, there devices at 1 and 2.
-        [DllImport("BUF_USBCCDCamera_SDK_Stdcall.dll", EntryPoint = "BUFCCDUSB_AddDeviceToWorkingSet", CallingConvention = CallingConvention.StdCall)]
-        private static extern uint BufAddDeviceToWorkingSet(int deviceID);
-
-        //Remove device from working set. 
-        [DllImport("BUF_USBCCDCamera_SDK_Stdcall.dll", EntryPoint = "BUFCCDUSB_RemoveDeviceFromWorkingSet", CallingConvention = CallingConvention.StdCall)]
-        private static extern uint BufRemoveDeviceFromWorkingSet(int deviceID);
-
-        //Sets camera to either "video" mode - continuously deliver frames to PC or
-        //"external trigger" mode - camera waits for external trigger to capture 1 frame
-        //returns:  -1 If the function fails (e.g. invalid device handle), 1 if the call succeeds.
-        [DllImport("BUF_USBCCDCamera_SDK_Stdcall.dll", EntryPoint = "BUFCCDUSB_SetCameraWorkMode", CallingConvention = CallingConvention.StdCall)]
-        private static extern int BufSetCameraWorkMode(int deviceID, int WorkMode);
-
-        //Set the resolution (including capture and render)
-        //returns:  -1 If the function fails (e.g. invalid device handle), 1 if the call succeeds.
-        //Note: only three elements _resolution, _binMode and _imageRendorFitWindow are used by this function, all others are ignored.
-
-        //returns:  -1 If the function fails (e.g. invalid device handle), 1 if the call succeeds.
-        //Note: only three elements _resolution, _binMode and _imageRendorFitWindow are used by this function, all others are ignored.
-        [DllImport("BUF_USBCCDCamera_SDK_Stdcall.dll", EntryPoint = "BUFCCDUSB_SetCustomizedResolution", CallingConvention = CallingConvention.StdCall)]
-        private static extern int BufSetCustomizedResolution(int deviceID, int rowSize, int columnSize, int bin, int bufferCnt);
-
-
-        //Set the start position of ROI
-        //returns:  -1 If the function fails (e.g. invalid device handle), 1 if the call succeeds.
-        //Note: only two elements _xStart and _yStart are used by this function, all others are ignored.
-        [DllImport("BUF_USBCCDCamera_SDK_Stdcall.dll", EntryPoint = "BUFCCDUSB_SetXYStart", CallingConvention = CallingConvention.StdCall)]
-        private static extern int BufSetStartPosition(int deviceID, int xStart, int yStart);
-
-        //Set RGB Gains parameters
-        //returns:  -1 If the function fails (e.g. invalid device handle), 1 if the call succeeds.
-        //Note: only three elements _greenGain, _blueGain and _redGain are used by this function, all others are ignored.
-        [DllImport("BUF_USBCCDCamera_SDK_Stdcall.dll", EntryPoint = "BUFCCDUSB_SetGains", CallingConvention = CallingConvention.StdCall)]
-        private static extern int BufSetGains(int deviceID, int redGain, int greenGain, int blueGain);
-
-        //Set exposure parameters
-        //returns:  -1 If the function fails (e.g. invalid device handle), 1 if the call succeeds.
-        //Note: only two elements _maxExposureTimeIndex and _exposureTime are used by this function, all others are ignored.
-        [DllImport("BUF_USBCCDCamera_SDK_Stdcall.dll", EntryPoint = "BUFCCDUSB_SetExposureTime", CallingConvention = CallingConvention.StdCall)]
-        private static extern int BufSetExposureTime(int deviceID, int exposureTime);
-        #endregion
-    }
-
-    [StructLayout(LayoutKind.Explicit)]
-    public struct ImageProperty
-    {
-        [FieldOffset(0)] public int CameraID;
-        [FieldOffset(4)] public int Row;
-        [FieldOffset(8)] public int Column;
-        [FieldOffset(12)] public int Bin;
-        [FieldOffset(16)] public int XStart;
-        [FieldOffset(20)] public int YStart;
-        [FieldOffset(24)] public int ExposureTime;
-        [FieldOffset(28)] public int RedGain;
-        [FieldOffset(32)] public int GreenGain;
-        [FieldOffset(36)] public int BlueGain;
-        [FieldOffset(40)] public int TimeStamp;
-        [FieldOffset(44)] public int TriggerOccurred;
-        [FieldOffset(48)] public int TriggerEventCount;
-        [FieldOffset(52)] public int UserMark;
-        [FieldOffset(56)] public int FrameTime;
-        [FieldOffset(60)] public int CCDFrequency;
-        [FieldOffset(64)] public int ProcessFrameType;
-        [FieldOffset(68)] public int tFilterAcceptForFile;
-    }
 
     public delegate void FrameCallbackDelegate(ref ImageProperty frameProperty, IntPtr BufferPtr);
 
@@ -291,16 +27,15 @@ namespace CCDApp
         public FrameCallbackDelegate frameDelegate;
 
         public CCDCamera[] CCDCameras;
-        private enum CAMERA_BIT { BIT_8_CAMERA = 8, BIT_12_CAMERA = 12 };
         PictureBox[] p;
 
         private ColorPalette palette;
         public USBCamInterface(IntPtr handle, PictureBox[] ps)
         {
+            palette = CalculateGreyscalePalette();
             p = ps;
             windowHandle = handle;
             frameDelegate = new FrameCallbackDelegate(FrameCallback);
-            palette = CalculateGreyscalePalette();
         }
 
         private ColorPalette CalculateGreyscalePalette() //from https://stackoverflow.com/questions/8603596/how-can-i-define-a-8-bit-grayscale-image-directly
@@ -333,7 +68,7 @@ namespace CCDApp
                 Terminate();
             }
 
-            numDevices = BufInitDevice(); //1
+            numDevices = BufInitDevice();
             Console.WriteLine(String.Format("{0} Devices Detected", numDevices));
 
             serialNumbers = new string[numDevices];
@@ -342,9 +77,11 @@ namespace CCDApp
             for (int i = 0; i < numDevices; i++)
             {
                 CCDCameras[i] = new CCDCamera(i + 1);
-                CCDCameras[i].ActivateDevice();
+                CCDCameras[i].SetDebugMode(true);
+
                 moduleNumbers[i] = CCDCameras[i].GetModelNumber();
                 serialNumbers[i] = CCDCameras[i].GetSerialNumber();
+                CCDCameras[i].ActivateDevice();
             }
             Console.WriteLine(String.Format("{0} Devices Initialized",numDevices));
             StartEngine();
@@ -377,12 +114,14 @@ namespace CCDApp
         {
             if (!engineRunning)
             {
-                if (BufStartCameraEngine(windowHandle, (uint)CAMERA_BIT.BIT_8_CAMERA) < 0)
+                if (BufStartCameraEngine(windowHandle, (uint)8) == 1)
                 {
                     engineRunning = true;
                     Console.WriteLine("Camera Engine Started");
                     return true;
                 }
+                engineRunning = false;
+                Console.WriteLine("Camera Engine Failed");
                 return false;
             }
             return true;
@@ -433,6 +172,21 @@ namespace CCDApp
             BufSetBWMode(1, horzMirror ? 1 : 0, vertFlip ? 1 : 0);
         }
 
+        public void SetExposureTime(double expTimeMs)
+        {
+            for(int i = 0; i < numDevices; i++)
+            {
+                CCDCameras[i].SetExposureTime(expTimeMs);
+            }
+        }
+
+        public void SetGain(int gain)
+        {
+            for(int i = 0; i < numDevices; i++)
+            {
+                CCDCameras[i].SetGain(gain);
+            }
+        }
         
           /*************************************/
          //Memory Mangment & Buffer Processing//
@@ -453,7 +207,9 @@ namespace CCDApp
             int id = imgProperty.CameraID-1;
             int width = imgProperty.Column;
             int height = imgProperty.Row;
-            Console.WriteLine("Image Device:{0} {1}x{2}",id, width, height);
+            int counter = imgProperty.TriggerEventCount;
+
+            Console.WriteLine("Image #{3} Device:{0} {1}x{2}",id, width, height, counter);
             
             Bitmap bmp = new Bitmap(width, height, width,PixelFormat.Format8bppIndexed, bufferPtr);
             bmp.Palette = palette;
