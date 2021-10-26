@@ -29,37 +29,22 @@ namespace CCDApp
             CameraStartup();
             
         }
-        private void CreateCameraSettingsList(Control parent, string name)
-        {
-
-            GroupBox gb = new GroupBox();
-            gb.Text = name;
-            gb.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            gb.AutoSize = true;
-            parent.Controls.Add(gb);
-
-
-            FlowLayoutPanel flp = new FlowLayoutPanel();
-            flp.Text = name;
-            flp.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            flp.AutoSize = true;
-            flp.Location = new Point(20, 20);
-            gb.Controls.Add(flp);
-
-
-            Button b = new Button();
-            b.Text = "button1";
-            b.Size = new Size(200, 45);
-            b.Visible = true;
-            flp.Controls.Add(b);
-            b.BringToFront();
-        }
 
         private void init_Click(object sender, EventArgs e)
         {
             CameraStartup();
         }
 
+        private void terminate_Click(object sender, EventArgs e)
+        {
+            if (CamInterface.Terminate())
+            {
+                terminate.Enabled = false;
+                init.Enabled = true;
+
+                this.cameraTabControl.Controls.Clear();
+            }
+        }
         private void CameraStartup() {
             CamInterface.Init();
             CamInterface.StartEngine();
@@ -76,17 +61,56 @@ namespace CCDApp
 
             for (int i = 0; i < cameraList.Length; i++)
             {
-                CreateCameraSettingsList(this.captureSettingsFlowContainer, cameraList[i]);
+                //TODO: need to remove these on termination so there arent duplicates
+                //CreateCameraSettingsList(this.captureSettingsFlowContainer, cameraList[i]);
+                CreateCameraSettingsList(this.cameraTabControl,cameraList[i], i);
             }
         }
 
-        private void terminate_Click(object sender, EventArgs e)
+
+        private void CreateCameraSettingsList(Control parent,string name, int id)
         {
-            if (CamInterface.Terminate())
+            TabPage tp = new TabPage();
+            tp.Text = name;
+            tp.BackColor = Color.White;
+            parent.Controls.Add(tp);
+            
+            /*
+            GroupBox gb = new GroupBox();
+            gb.Text = name;
+            gb.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            gb.AutoSize = true;
+            parent.Controls.Add(gb);
+            */
+            /*
+            FlowLayoutPanel flp = new FlowLayoutPanel
             {
-                terminate.Enabled = false;
-                init.Enabled = true;
-            }
+                Text = name,
+                FlowDirection = FlowDirection.TopDown,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                AutoSize = true,
+                Location = new Point(20, 20)
+            };
+
+            GroupBox gbExposureTime = new GroupBox();
+            GroupBox gbGain = new GroupBox();
+            GroupBox gbResolution = new GroupBox();
+
+            gbExposureTime.Name = "Exposure Time";
+            gbGain.Name = "Gain";
+            gbResolution.Name = "Resolution";
+
+            
+            
+
+
+            tp.Controls.Add(flp);
+
+            flp.Controls.Add(gbExposureTime);
+            flp.Controls.Add(gbGain);
+            flp.Controls.Add(gbResolution);
+            */
+
         }
 
         //check boxes changed for camera selection

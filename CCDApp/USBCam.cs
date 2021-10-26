@@ -13,7 +13,7 @@ namespace CCDApp
 
     public class USBCamInterface
     {
-        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
+        [DllImport("gdi32.dll")]
         public static extern bool DeleteObject(IntPtr hObject);
 
         private int numDevices = 0;
@@ -28,28 +28,16 @@ namespace CCDApp
 
         public CCDCamera[] CCDCameras;
         PictureBox[] p;
-
+        
         private ColorPalette palette;
         public USBCamInterface(IntPtr handle, PictureBox[] ps)
         {
-            palette = CalculateGreyscalePalette();
+            palette = new GreyscaleFormat8bpp().GreyScale8bpp;
             p = ps;
             windowHandle = handle;
             frameDelegate = new FrameCallbackDelegate(FrameCallback);
         }
 
-        private ColorPalette CalculateGreyscalePalette() //from https://stackoverflow.com/questions/8603596/how-can-i-define-a-8-bit-grayscale-image-directly
-        {
-            Bitmap bmp = new Bitmap(1, 1, PixelFormat.Format8bppIndexed);
-            ColorPalette p = bmp.Palette;
-
-            Color[] entries = p.Entries;
-            for (int i = 0; i < 256; i++)
-            {
-                entries[i] = Color.FromArgb(i, i, i);
-            }
-            return p;
-        }
 
           /****************/
          //Overall Status//
@@ -172,49 +160,43 @@ namespace CCDApp
             BufSetBWMode(1, horzMirror ? 1 : 0, vertFlip ? 1 : 0);
         }
 
+
         public void SetExposureTime(double expTimeMs)
         {
-            for(int i = 0; i < numDevices; i++)
+            for (int i = 0; i < numDevices; i++)
             {
-                CCDCameras[i].SetExposureTime(expTimeMs);
+                SetExposureTime(expTimeMs, i);
             }
+        }
+        public void SetExposureTime(double expTimeMs, int id)
+        {
+            CCDCameras[id].SetExposureTime(expTimeMs);
         }
 
         public void SetGain(int gain)
         {
-            for(int i = 0; i < numDevices; i++)
+            for (int i = 0; i < numDevices; i++)
             {
-                CCDCameras[i].SetGain(gain);
+                SetGain(gain, i);
             }
         }
-        
-          /*************************************/
-         //Memory Mangment & Buffer Processing//
+        public void SetGain(int gain, int id)
+        {
+            CCDCameras[id].SetGain(gain);
+        }
+
         /*************************************/
-        public IntPtr AllocImageMem(int size)
-        {
-            return Marshal.AllocHGlobal(size);
-        }
-        public void FreeImageMem(IntPtr image)
-        {
-            if (imagePointer != IntPtr.Zero)
-            {
-                Marshal.FreeHGlobal(image);
-            }
-        }
+        //Memory Mangment & Buffer Processing//
+        /*************************************/
         public void FrameCallback( ref ImageProperty imgProperty, IntPtr bufferPtr)
         {
             int id = imgProperty.CameraID-1;
             int width = imgProperty.Column;
             int height = imgProperty.Row;
-            int counter = imgProperty.TriggerEventCount;
-
-            Console.WriteLine("Image #{3} Device:{0} {1}x{2}",id, width, height, counter);
             
             Bitmap bmp = new Bitmap(width, height, width,PixelFormat.Format8bppIndexed, bufferPtr);
             bmp.Palette = palette;
             drawFrame(id, bmp);
-            //bmp.Dispose();
         }
         public void drawFrame(int id, Bitmap data)
         {

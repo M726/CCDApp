@@ -31,12 +31,29 @@
             this.init = new System.Windows.Forms.Button();
             this.terminate = new System.Windows.Forms.Button();
             this.cameraActivationList = new System.Windows.Forms.CheckedListBox();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.cameraTabControl = new System.Windows.Forms.TabControl();
+            this.cameraSettingsTemplate = new System.Windows.Forms.TabPage();
+            this.stopCaptureButton = new System.Windows.Forms.Button();
+            this.captureButton = new System.Windows.Forms.Button();
             this.ModeContainer = new System.Windows.Forms.GroupBox();
             this.ModeFlowContainer = new System.Windows.Forms.FlowLayoutPanel();
             this.CameraModeContinuous = new System.Windows.Forms.RadioButton();
             this.CameraModeTrigger = new System.Windows.Forms.RadioButton();
             this.ResolutionContainer = new System.Windows.Forms.GroupBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.GainContainer = new System.Windows.Forms.GroupBox();
+            this.gainControl = new System.Windows.Forms.NumericUpDown();
+            this.gainControlInput = new System.Windows.Forms.TrackBar();
+            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
             this.ExposureTimeContainer = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -44,43 +61,24 @@
             this.exposureTimeFineControl = new System.Windows.Forms.NumericUpDown();
             this.ExposureTimeInput = new System.Windows.Forms.TrackBar();
             this.ExposureTimeFlowContainer = new System.Windows.Forms.FlowLayoutPanel();
-            this.GainContainer = new System.Windows.Forms.GroupBox();
-            this.gainControl = new System.Windows.Forms.NumericUpDown();
-            this.gainControlInput = new System.Windows.Forms.TrackBar();
-            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.stopCaptureButton = new System.Windows.Forms.Button();
-            this.captureButton = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.captureSettingsFlowContainer = new System.Windows.Forms.FlowLayoutPanel();
-            this.ModeContainer.SuspendLayout();
-            this.ModeFlowContainer.SuspendLayout();
-            this.ResolutionContainer.SuspendLayout();
-            this.ExposureTimeContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.exposureTimeOoMControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.exposureTimeFineControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ExposureTimeInput)).BeginInit();
-            this.GainContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gainControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gainControlInput)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage3.SuspendLayout();
             this.flowLayoutPanel6.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.cameraSettingsTemplate.SuspendLayout();
+            this.ModeContainer.SuspendLayout();
+            this.ModeFlowContainer.SuspendLayout();
+            this.ResolutionContainer.SuspendLayout();
+            this.GainContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gainControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gainControlInput)).BeginInit();
+            this.ExposureTimeContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.exposureTimeOoMControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.exposureTimeFineControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ExposureTimeInput)).BeginInit();
             this.SuspendLayout();
             // 
             // init
@@ -117,224 +115,6 @@
             this.cameraActivationList.ThreeDCheckBoxes = true;
             this.cameraActivationList.SelectedIndexChanged += new System.EventHandler(this.cameraActivationList_SelectedIndexChanged);
             // 
-            // ModeContainer
-            // 
-            this.ModeContainer.AutoSize = true;
-            this.ModeContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ModeContainer.Controls.Add(this.ModeFlowContainer);
-            this.ModeContainer.Location = new System.Drawing.Point(6, 3);
-            this.ModeContainer.Name = "ModeContainer";
-            this.ModeContainer.Size = new System.Drawing.Size(160, 61);
-            this.ModeContainer.TabIndex = 10;
-            this.ModeContainer.TabStop = false;
-            this.ModeContainer.Text = "Capture Mode";
-            // 
-            // ModeFlowContainer
-            // 
-            this.ModeFlowContainer.AutoSize = true;
-            this.ModeFlowContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ModeFlowContainer.Controls.Add(this.CameraModeContinuous);
-            this.ModeFlowContainer.Controls.Add(this.CameraModeTrigger);
-            this.ModeFlowContainer.Location = new System.Drawing.Point(6, 19);
-            this.ModeFlowContainer.Name = "ModeFlowContainer";
-            this.ModeFlowContainer.Size = new System.Drawing.Size(148, 23);
-            this.ModeFlowContainer.TabIndex = 10;
-            // 
-            // CameraModeContinuous
-            // 
-            this.CameraModeContinuous.AutoSize = true;
-            this.CameraModeContinuous.Checked = true;
-            this.CameraModeContinuous.Location = new System.Drawing.Point(3, 3);
-            this.CameraModeContinuous.Name = "CameraModeContinuous";
-            this.CameraModeContinuous.Size = new System.Drawing.Size(78, 17);
-            this.CameraModeContinuous.TabIndex = 9;
-            this.CameraModeContinuous.TabStop = true;
-            this.CameraModeContinuous.Text = "Continuous";
-            this.CameraModeContinuous.UseVisualStyleBackColor = true;
-            // 
-            // CameraModeTrigger
-            // 
-            this.CameraModeTrigger.AutoSize = true;
-            this.CameraModeTrigger.Enabled = false;
-            this.CameraModeTrigger.Location = new System.Drawing.Point(87, 3);
-            this.CameraModeTrigger.Name = "CameraModeTrigger";
-            this.CameraModeTrigger.Size = new System.Drawing.Size(58, 17);
-            this.CameraModeTrigger.TabIndex = 10;
-            this.CameraModeTrigger.Text = "Trigger";
-            this.CameraModeTrigger.UseVisualStyleBackColor = true;
-            this.CameraModeTrigger.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
-            // 
-            // ResolutionContainer
-            // 
-            this.ResolutionContainer.AutoSize = true;
-            this.ResolutionContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ResolutionContainer.Controls.Add(this.comboBox1);
-            this.ResolutionContainer.Location = new System.Drawing.Point(206, 5);
-            this.ResolutionContainer.Name = "ResolutionContainer";
-            this.ResolutionContainer.Size = new System.Drawing.Size(133, 59);
-            this.ResolutionContainer.TabIndex = 15;
-            this.ResolutionContainer.TabStop = false;
-            this.ResolutionContainer.Text = "Resolution";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(6, 19);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 6;
-            this.comboBox1.Text = "1280x960";
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
-            // ExposureTimeContainer
-            // 
-            this.ExposureTimeContainer.AutoSize = true;
-            this.ExposureTimeContainer.Controls.Add(this.label2);
-            this.ExposureTimeContainer.Controls.Add(this.label1);
-            this.ExposureTimeContainer.Controls.Add(this.exposureTimeOoMControl);
-            this.ExposureTimeContainer.Controls.Add(this.exposureTimeFineControl);
-            this.ExposureTimeContainer.Controls.Add(this.ExposureTimeInput);
-            this.ExposureTimeContainer.Controls.Add(this.ExposureTimeFlowContainer);
-            this.ExposureTimeContainer.Location = new System.Drawing.Point(6, 70);
-            this.ExposureTimeContainer.Name = "ExposureTimeContainer";
-            this.ExposureTimeContainer.Size = new System.Drawing.Size(333, 89);
-            this.ExposureTimeContainer.TabIndex = 13;
-            this.ExposureTimeContainer.TabStop = false;
-            this.ExposureTimeContainer.Text = "Exposure Time";
-            this.ExposureTimeContainer.Enter += new System.EventHandler(this.groupBox2_Enter);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(312, 27);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(12, 13);
-            this.label2.TabIndex = 15;
-            this.label2.Text = "s";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(240, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(33, 13);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "x 10^";
-            // 
-            // exposureTimeOoMControl
-            // 
-            this.exposureTimeOoMControl.BackColor = System.Drawing.SystemColors.Window;
-            this.exposureTimeOoMControl.Location = new System.Drawing.Point(275, 25);
-            this.exposureTimeOoMControl.Maximum = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.exposureTimeOoMControl.Minimum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            -2147483648});
-            this.exposureTimeOoMControl.Name = "exposureTimeOoMControl";
-            this.exposureTimeOoMControl.Size = new System.Drawing.Size(35, 20);
-            this.exposureTimeOoMControl.TabIndex = 13;
-            this.exposureTimeOoMControl.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            -2147483648});
-            this.exposureTimeOoMControl.ValueChanged += new System.EventHandler(this.exposureTimeOoMControl_ValueChanged);
-            // 
-            // exposureTimeFineControl
-            // 
-            this.exposureTimeFineControl.Location = new System.Drawing.Point(199, 25);
-            this.exposureTimeFineControl.Name = "exposureTimeFineControl";
-            this.exposureTimeFineControl.Size = new System.Drawing.Size(39, 20);
-            this.exposureTimeFineControl.TabIndex = 12;
-            this.exposureTimeFineControl.Value = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            this.exposureTimeFineControl.ValueChanged += new System.EventHandler(this.exposureTimeFineControl_ValueChanged);
-            // 
-            // ExposureTimeInput
-            // 
-            this.ExposureTimeInput.BackColor = System.Drawing.Color.White;
-            this.ExposureTimeInput.Location = new System.Drawing.Point(6, 25);
-            this.ExposureTimeInput.Maximum = 100;
-            this.ExposureTimeInput.Name = "ExposureTimeInput";
-            this.ExposureTimeInput.Size = new System.Drawing.Size(187, 45);
-            this.ExposureTimeInput.TabIndex = 8;
-            this.ExposureTimeInput.TickFrequency = 5;
-            this.ExposureTimeInput.Value = 50;
-            this.ExposureTimeInput.Scroll += new System.EventHandler(this.ExposureTimeInput_Scroll);
-            // 
-            // ExposureTimeFlowContainer
-            // 
-            this.ExposureTimeFlowContainer.AutoSize = true;
-            this.ExposureTimeFlowContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ExposureTimeFlowContainer.Location = new System.Drawing.Point(17, 19);
-            this.ExposureTimeFlowContainer.Name = "ExposureTimeFlowContainer";
-            this.ExposureTimeFlowContainer.Size = new System.Drawing.Size(0, 0);
-            this.ExposureTimeFlowContainer.TabIndex = 11;
-            // 
-            // GainContainer
-            // 
-            this.GainContainer.Controls.Add(this.gainControl);
-            this.GainContainer.Controls.Add(this.gainControlInput);
-            this.GainContainer.Controls.Add(this.flowLayoutPanel5);
-            this.GainContainer.Location = new System.Drawing.Point(6, 165);
-            this.GainContainer.Name = "GainContainer";
-            this.GainContainer.Size = new System.Drawing.Size(333, 85);
-            this.GainContainer.TabIndex = 14;
-            this.GainContainer.TabStop = false;
-            this.GainContainer.Text = "Gain";
-            // 
-            // gainControl
-            // 
-            this.gainControl.Location = new System.Drawing.Point(244, 19);
-            this.gainControl.Maximum = new decimal(new int[] {
-            41,
-            0,
-            0,
-            0});
-            this.gainControl.Minimum = new decimal(new int[] {
-            6,
-            0,
-            0,
-            0});
-            this.gainControl.Name = "gainControl";
-            this.gainControl.Size = new System.Drawing.Size(52, 20);
-            this.gainControl.TabIndex = 13;
-            this.gainControl.Value = new decimal(new int[] {
-            15,
-            0,
-            0,
-            0});
-            this.gainControl.ValueChanged += new System.EventHandler(this.gainControl_ValueChanged);
-            // 
-            // gainControlInput
-            // 
-            this.gainControlInput.BackColor = System.Drawing.Color.White;
-            this.gainControlInput.Location = new System.Drawing.Point(6, 19);
-            this.gainControlInput.Maximum = 41;
-            this.gainControlInput.Minimum = 6;
-            this.gainControlInput.Name = "gainControlInput";
-            this.gainControlInput.Size = new System.Drawing.Size(232, 45);
-            this.gainControlInput.TabIndex = 7;
-            this.gainControlInput.Value = 15;
-            this.gainControlInput.Scroll += new System.EventHandler(this.gainControlInput_Scroll);
-            // 
-            // flowLayoutPanel5
-            // 
-            this.flowLayoutPanel5.AutoSize = true;
-            this.flowLayoutPanel5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(17, 19);
-            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(0, 0);
-            this.flowLayoutPanel5.TabIndex = 12;
-            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoSize = true;
@@ -342,11 +122,12 @@
             this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel2);
             this.flowLayoutPanel1.Controls.Add(this.cameraActivationList);
             this.flowLayoutPanel1.Controls.Add(this.tabControl1);
+            this.flowLayoutPanel1.Controls.Add(this.cameraTabControl);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(8, 8);
             this.flowLayoutPanel1.MinimumSize = new System.Drawing.Size(200, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(366, 361);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(366, 524);
             this.flowLayoutPanel1.TabIndex = 4;
             // 
             // flowLayoutPanel2
@@ -363,52 +144,13 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.cameraSettingsTemplate);
             this.tabControl1.Location = new System.Drawing.Point(3, 53);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(360, 305);
             this.tabControl1.TabIndex = 7;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.tabPage1.Controls.Add(this.stopCaptureButton);
-            this.tabPage1.Controls.Add(this.captureButton);
-            this.tabPage1.Controls.Add(this.ModeContainer);
-            this.tabPage1.Controls.Add(this.ResolutionContainer);
-            this.tabPage1.Controls.Add(this.GainContainer);
-            this.tabPage1.Controls.Add(this.ExposureTimeContainer);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(352, 279);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Camera Settings";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // stopCaptureButton
-            // 
-            this.stopCaptureButton.Enabled = false;
-            this.stopCaptureButton.Location = new System.Drawing.Point(87, 256);
-            this.stopCaptureButton.Name = "stopCaptureButton";
-            this.stopCaptureButton.Size = new System.Drawing.Size(75, 23);
-            this.stopCaptureButton.TabIndex = 17;
-            this.stopCaptureButton.Text = "Stop Capture";
-            this.stopCaptureButton.UseVisualStyleBackColor = true;
-            this.stopCaptureButton.Click += new System.EventHandler(this.stopCaptureButton_Click);
-            // 
-            // captureButton
-            // 
-            this.captureButton.Location = new System.Drawing.Point(6, 256);
-            this.captureButton.Name = "captureButton";
-            this.captureButton.Size = new System.Drawing.Size(75, 23);
-            this.captureButton.TabIndex = 16;
-            this.captureButton.Text = "Capture";
-            this.captureButton.UseVisualStyleBackColor = true;
-            this.captureButton.Click += new System.EventHandler(this.captureButton_Click);
             // 
             // tabPage2
             // 
@@ -419,17 +161,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Processing Settings";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.captureSettingsFlowContainer);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(352, 279);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Capture Settings";
-            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // flowLayoutPanel6
             // 
@@ -481,16 +212,260 @@
             this.saveFileDialog1.ValidateNames = false;
             this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
             // 
-            // captureSettingsFlowContainer
+            // cameraTabControl
             // 
-            this.captureSettingsFlowContainer.AutoSize = true;
-            this.captureSettingsFlowContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.captureSettingsFlowContainer.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.captureSettingsFlowContainer.Location = new System.Drawing.Point(6, 6);
-            this.captureSettingsFlowContainer.MinimumSize = new System.Drawing.Size(100, 100);
-            this.captureSettingsFlowContainer.Name = "captureSettingsFlowContainer";
-            this.captureSettingsFlowContainer.Size = new System.Drawing.Size(100, 100);
-            this.captureSettingsFlowContainer.TabIndex = 11;
+            this.cameraTabControl.Location = new System.Drawing.Point(3, 364);
+            this.cameraTabControl.MinimumSize = new System.Drawing.Size(360, 0);
+            this.cameraTabControl.Name = "cameraTabControl";
+            this.cameraTabControl.SelectedIndex = 0;
+            this.cameraTabControl.Size = new System.Drawing.Size(360, 157);
+            this.cameraTabControl.TabIndex = 8;
+            // 
+            // cameraSettingsTemplate
+            // 
+            this.cameraSettingsTemplate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.cameraSettingsTemplate.Controls.Add(this.stopCaptureButton);
+            this.cameraSettingsTemplate.Controls.Add(this.captureButton);
+            this.cameraSettingsTemplate.Controls.Add(this.ModeContainer);
+            this.cameraSettingsTemplate.Controls.Add(this.ResolutionContainer);
+            this.cameraSettingsTemplate.Controls.Add(this.GainContainer);
+            this.cameraSettingsTemplate.Controls.Add(this.ExposureTimeContainer);
+            this.cameraSettingsTemplate.Location = new System.Drawing.Point(4, 22);
+            this.cameraSettingsTemplate.Name = "cameraSettingsTemplate";
+            this.cameraSettingsTemplate.Padding = new System.Windows.Forms.Padding(3);
+            this.cameraSettingsTemplate.Size = new System.Drawing.Size(352, 279);
+            this.cameraSettingsTemplate.TabIndex = 2;
+            this.cameraSettingsTemplate.Text = "Camera Settings";
+            this.cameraSettingsTemplate.UseVisualStyleBackColor = true;
+            // 
+            // stopCaptureButton
+            // 
+            this.stopCaptureButton.Enabled = false;
+            this.stopCaptureButton.Location = new System.Drawing.Point(87, 256);
+            this.stopCaptureButton.Name = "stopCaptureButton";
+            this.stopCaptureButton.Size = new System.Drawing.Size(75, 23);
+            this.stopCaptureButton.TabIndex = 17;
+            this.stopCaptureButton.Text = "Stop Capture";
+            this.stopCaptureButton.UseVisualStyleBackColor = true;
+            // 
+            // captureButton
+            // 
+            this.captureButton.Location = new System.Drawing.Point(6, 256);
+            this.captureButton.Name = "captureButton";
+            this.captureButton.Size = new System.Drawing.Size(75, 23);
+            this.captureButton.TabIndex = 16;
+            this.captureButton.Text = "Capture";
+            this.captureButton.UseVisualStyleBackColor = true;
+            // 
+            // ModeContainer
+            // 
+            this.ModeContainer.AutoSize = true;
+            this.ModeContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ModeContainer.Controls.Add(this.ModeFlowContainer);
+            this.ModeContainer.Location = new System.Drawing.Point(6, 3);
+            this.ModeContainer.Name = "ModeContainer";
+            this.ModeContainer.Size = new System.Drawing.Size(160, 61);
+            this.ModeContainer.TabIndex = 10;
+            this.ModeContainer.TabStop = false;
+            this.ModeContainer.Text = "Capture Mode";
+            // 
+            // ModeFlowContainer
+            // 
+            this.ModeFlowContainer.AutoSize = true;
+            this.ModeFlowContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ModeFlowContainer.Controls.Add(this.CameraModeContinuous);
+            this.ModeFlowContainer.Controls.Add(this.CameraModeTrigger);
+            this.ModeFlowContainer.Location = new System.Drawing.Point(6, 19);
+            this.ModeFlowContainer.Name = "ModeFlowContainer";
+            this.ModeFlowContainer.Size = new System.Drawing.Size(148, 23);
+            this.ModeFlowContainer.TabIndex = 10;
+            // 
+            // CameraModeContinuous
+            // 
+            this.CameraModeContinuous.AutoSize = true;
+            this.CameraModeContinuous.Checked = true;
+            this.CameraModeContinuous.Location = new System.Drawing.Point(3, 3);
+            this.CameraModeContinuous.Name = "CameraModeContinuous";
+            this.CameraModeContinuous.Size = new System.Drawing.Size(78, 17);
+            this.CameraModeContinuous.TabIndex = 9;
+            this.CameraModeContinuous.TabStop = true;
+            this.CameraModeContinuous.Text = "Continuous";
+            this.CameraModeContinuous.UseVisualStyleBackColor = true;
+            // 
+            // CameraModeTrigger
+            // 
+            this.CameraModeTrigger.AutoSize = true;
+            this.CameraModeTrigger.Enabled = false;
+            this.CameraModeTrigger.Location = new System.Drawing.Point(87, 3);
+            this.CameraModeTrigger.Name = "CameraModeTrigger";
+            this.CameraModeTrigger.Size = new System.Drawing.Size(58, 17);
+            this.CameraModeTrigger.TabIndex = 10;
+            this.CameraModeTrigger.Text = "Trigger";
+            this.CameraModeTrigger.UseVisualStyleBackColor = true;
+            // 
+            // ResolutionContainer
+            // 
+            this.ResolutionContainer.AutoSize = true;
+            this.ResolutionContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ResolutionContainer.Controls.Add(this.comboBox1);
+            this.ResolutionContainer.Location = new System.Drawing.Point(206, 5);
+            this.ResolutionContainer.Name = "ResolutionContainer";
+            this.ResolutionContainer.Size = new System.Drawing.Size(133, 59);
+            this.ResolutionContainer.TabIndex = 15;
+            this.ResolutionContainer.TabStop = false;
+            this.ResolutionContainer.Text = "Resolution";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(6, 19);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 6;
+            this.comboBox1.Text = "1280x960";
+            // 
+            // GainContainer
+            // 
+            this.GainContainer.Controls.Add(this.gainControl);
+            this.GainContainer.Controls.Add(this.gainControlInput);
+            this.GainContainer.Controls.Add(this.flowLayoutPanel5);
+            this.GainContainer.Location = new System.Drawing.Point(6, 165);
+            this.GainContainer.Name = "GainContainer";
+            this.GainContainer.Size = new System.Drawing.Size(333, 85);
+            this.GainContainer.TabIndex = 14;
+            this.GainContainer.TabStop = false;
+            this.GainContainer.Text = "Gain";
+            // 
+            // gainControl
+            // 
+            this.gainControl.Location = new System.Drawing.Point(244, 19);
+            this.gainControl.Maximum = new decimal(new int[] {
+            41,
+            0,
+            0,
+            0});
+            this.gainControl.Minimum = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
+            this.gainControl.Name = "gainControl";
+            this.gainControl.Size = new System.Drawing.Size(52, 20);
+            this.gainControl.TabIndex = 13;
+            this.gainControl.Value = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+            // 
+            // gainControlInput
+            // 
+            this.gainControlInput.BackColor = System.Drawing.Color.White;
+            this.gainControlInput.Location = new System.Drawing.Point(6, 19);
+            this.gainControlInput.Maximum = 41;
+            this.gainControlInput.Minimum = 6;
+            this.gainControlInput.Name = "gainControlInput";
+            this.gainControlInput.Size = new System.Drawing.Size(232, 45);
+            this.gainControlInput.TabIndex = 7;
+            this.gainControlInput.Value = 15;
+            // 
+            // flowLayoutPanel5
+            // 
+            this.flowLayoutPanel5.AutoSize = true;
+            this.flowLayoutPanel5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(17, 19);
+            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(0, 0);
+            this.flowLayoutPanel5.TabIndex = 12;
+            // 
+            // ExposureTimeContainer
+            // 
+            this.ExposureTimeContainer.AutoSize = true;
+            this.ExposureTimeContainer.Controls.Add(this.label2);
+            this.ExposureTimeContainer.Controls.Add(this.label1);
+            this.ExposureTimeContainer.Controls.Add(this.exposureTimeOoMControl);
+            this.ExposureTimeContainer.Controls.Add(this.exposureTimeFineControl);
+            this.ExposureTimeContainer.Controls.Add(this.ExposureTimeInput);
+            this.ExposureTimeContainer.Controls.Add(this.ExposureTimeFlowContainer);
+            this.ExposureTimeContainer.Location = new System.Drawing.Point(6, 70);
+            this.ExposureTimeContainer.Name = "ExposureTimeContainer";
+            this.ExposureTimeContainer.Size = new System.Drawing.Size(333, 89);
+            this.ExposureTimeContainer.TabIndex = 13;
+            this.ExposureTimeContainer.TabStop = false;
+            this.ExposureTimeContainer.Text = "Exposure Time";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(312, 27);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(12, 13);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "s";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(240, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(33, 13);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "x 10^";
+            // 
+            // exposureTimeOoMControl
+            // 
+            this.exposureTimeOoMControl.BackColor = System.Drawing.SystemColors.Window;
+            this.exposureTimeOoMControl.Location = new System.Drawing.Point(275, 25);
+            this.exposureTimeOoMControl.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.exposureTimeOoMControl.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            -2147483648});
+            this.exposureTimeOoMControl.Name = "exposureTimeOoMControl";
+            this.exposureTimeOoMControl.Size = new System.Drawing.Size(35, 20);
+            this.exposureTimeOoMControl.TabIndex = 13;
+            this.exposureTimeOoMControl.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            -2147483648});
+            // 
+            // exposureTimeFineControl
+            // 
+            this.exposureTimeFineControl.Location = new System.Drawing.Point(199, 25);
+            this.exposureTimeFineControl.Name = "exposureTimeFineControl";
+            this.exposureTimeFineControl.Size = new System.Drawing.Size(39, 20);
+            this.exposureTimeFineControl.TabIndex = 12;
+            this.exposureTimeFineControl.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            // 
+            // ExposureTimeInput
+            // 
+            this.ExposureTimeInput.BackColor = System.Drawing.Color.White;
+            this.ExposureTimeInput.Location = new System.Drawing.Point(6, 25);
+            this.ExposureTimeInput.Maximum = 100;
+            this.ExposureTimeInput.Name = "ExposureTimeInput";
+            this.ExposureTimeInput.Size = new System.Drawing.Size(187, 45);
+            this.ExposureTimeInput.TabIndex = 8;
+            this.ExposureTimeInput.TickFrequency = 5;
+            this.ExposureTimeInput.Value = 50;
+            // 
+            // ExposureTimeFlowContainer
+            // 
+            this.ExposureTimeFlowContainer.AutoSize = true;
+            this.ExposureTimeFlowContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ExposureTimeFlowContainer.Location = new System.Drawing.Point(17, 19);
+            this.ExposureTimeFlowContainer.Name = "ExposureTimeFlowContainer";
+            this.ExposureTimeFlowContainer.Size = new System.Drawing.Size(0, 0);
+            this.ExposureTimeFlowContainer.TabIndex = 11;
             // 
             // CCDAppMain
             // 
@@ -505,33 +480,31 @@
             this.Text = "Multiple CCD Controller";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormExit);
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.ModeContainer.ResumeLayout(false);
-            this.ModeContainer.PerformLayout();
-            this.ModeFlowContainer.ResumeLayout(false);
-            this.ModeFlowContainer.PerformLayout();
-            this.ResolutionContainer.ResumeLayout(false);
-            this.ExposureTimeContainer.ResumeLayout(false);
-            this.ExposureTimeContainer.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.exposureTimeOoMControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.exposureTimeFineControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ExposureTimeInput)).EndInit();
-            this.GainContainer.ResumeLayout(false);
-            this.GainContainer.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gainControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gainControlInput)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
             this.flowLayoutPanel6.ResumeLayout(false);
             this.flowLayoutPanel6.PerformLayout();
             this.flowLayoutPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.cameraSettingsTemplate.ResumeLayout(false);
+            this.cameraSettingsTemplate.PerformLayout();
+            this.ModeContainer.ResumeLayout(false);
+            this.ModeContainer.PerformLayout();
+            this.ModeFlowContainer.ResumeLayout(false);
+            this.ModeFlowContainer.PerformLayout();
+            this.ResolutionContainer.ResumeLayout(false);
+            this.GainContainer.ResumeLayout(false);
+            this.GainContainer.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gainControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gainControlInput)).EndInit();
+            this.ExposureTimeContainer.ResumeLayout(false);
+            this.ExposureTimeContainer.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.exposureTimeOoMControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.exposureTimeFineControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ExposureTimeInput)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -544,35 +517,34 @@
         private System.Windows.Forms.CheckedListBox cameraActivationList;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.GroupBox ModeContainer;
-        private System.Windows.Forms.RadioButton CameraModeContinuous;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.GroupBox ExposureTimeContainer;
-        private System.Windows.Forms.FlowLayoutPanel ExposureTimeFlowContainer;
-        private System.Windows.Forms.TrackBar ExposureTimeInput;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
-        private System.Windows.Forms.TrackBar gainControlInput;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
-        private System.Windows.Forms.GroupBox GainContainer;
-        private System.Windows.Forms.FlowLayoutPanel ModeFlowContainer;
-        private System.Windows.Forms.RadioButton CameraModeTrigger;
-        private System.Windows.Forms.GroupBox ResolutionContainer;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Button captureButton;
-        private System.Windows.Forms.Button stopCaptureButton;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
-        private System.Windows.Forms.NumericUpDown exposureTimeFineControl;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.TabControl cameraTabControl;
+        private System.Windows.Forms.TabPage cameraSettingsTemplate;
+        private System.Windows.Forms.Button stopCaptureButton;
+        private System.Windows.Forms.Button captureButton;
+        private System.Windows.Forms.GroupBox ModeContainer;
+        private System.Windows.Forms.FlowLayoutPanel ModeFlowContainer;
+        private System.Windows.Forms.RadioButton CameraModeContinuous;
+        private System.Windows.Forms.RadioButton CameraModeTrigger;
+        private System.Windows.Forms.GroupBox ResolutionContainer;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.GroupBox GainContainer;
         private System.Windows.Forms.NumericUpDown gainControl;
-        private System.Windows.Forms.NumericUpDown exposureTimeOoMControl;
+        private System.Windows.Forms.TrackBar gainControlInput;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
+        private System.Windows.Forms.GroupBox ExposureTimeContainer;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.FlowLayoutPanel captureSettingsFlowContainer;
+        private System.Windows.Forms.NumericUpDown exposureTimeOoMControl;
+        private System.Windows.Forms.NumericUpDown exposureTimeFineControl;
+        private System.Windows.Forms.TrackBar ExposureTimeInput;
+        private System.Windows.Forms.FlowLayoutPanel ExposureTimeFlowContainer;
     }
 }
 
