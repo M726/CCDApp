@@ -22,18 +22,18 @@ namespace CCDApp
         private string[] serialNumbers;
         private bool engineRunning = false; //currently active engines
 
+        private PictureBox[] pictureBoxes;
+
         private IntPtr windowHandle;
-        private IntPtr imagePointer = new IntPtr();
         public FrameCallbackDelegate frameDelegate;
 
         public CCDCamera[] CCDCameras;
-        PictureBox[] p;
         
         private ColorPalette palette;
-        public USBCamInterface(IntPtr handle, PictureBox[] ps)
+        public USBCamInterface(IntPtr handle)
         {
+            //TODO: Add a 12bpp format
             palette = new GreyscaleFormat8bpp().GreyScale8bpp;
-            p = ps;
             windowHandle = handle;
             frameDelegate = new FrameCallbackDelegate(FrameCallback);
         }
@@ -62,6 +62,7 @@ namespace CCDApp
             serialNumbers = new string[numDevices];
             moduleNumbers = new string[numDevices];
             CCDCameras = new CCDCamera[numDevices];
+            pictureBoxes = new PictureBox[numDevices];
             for (int i = 0; i < numDevices; i++)
             {
                 CCDCameras[i] = new CCDCamera(i + 1);
@@ -70,6 +71,9 @@ namespace CCDApp
                 moduleNumbers[i] = CCDCameras[i].GetModelNumber();
                 serialNumbers[i] = CCDCameras[i].GetSerialNumber();
                 CCDCameras[i].ActivateDevice();
+
+                
+                 
             }
             Console.WriteLine(String.Format("{0} Devices Initialized",numDevices));
             StartEngine();
@@ -98,6 +102,11 @@ namespace CCDApp
             return true;
         }
         
+        public void AssignPictureBox(int id, PictureBox pb)
+        {
+            pictureBoxes[id] = pb;
+        }
+
         public bool StartEngine()
         {
             if (!engineRunning)
@@ -207,10 +216,11 @@ namespace CCDApp
                 image.Palette = palette; //remap the colors to 0-255 greyscale
 
                 //Find the largest size we can make our image to fit the box, then crop the box to that size
-                Size newSize = FindCommonSize(image.Size, p[id].Size);
+                Size newSize = new Size(400, 400);// FindCommonSize(image.Size, p[id].Size);
 
-                p[id].Size = newSize;
-                p[id].Image = new Bitmap(image, newSize);
+                //Set Image
+                pictureBoxes[id].Size = newSize;
+                pictureBoxes[id].Image = new Bitmap(image, newSize);
                 
                 image.Dispose();
                 data.Dispose();

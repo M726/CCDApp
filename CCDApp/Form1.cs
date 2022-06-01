@@ -22,10 +22,8 @@ namespace CCDApp
         private void Setup(Object o, EventArgs e)
         {
             //First time Setup 
-
-            PictureBox[] ps = { pictureBox1, pictureBox2 };
-
-            CamInterface = new USBCamInterface(this.Handle, ps);
+            
+            CamInterface = new USBCamInterface(this.Handle);
             CameraStartup();
             
         }
@@ -64,53 +62,80 @@ namespace CCDApp
                 //TODO: need to remove these on termination so there arent duplicates
                 //CreateCameraSettingsList(this.captureSettingsFlowContainer, cameraList[i]);
                 CreateCameraSettingsList(this.cameraTabControl,cameraList[i], i);
+                CreateCameraDisplay(this.cameraDisplayBox, cameraList[i], i);
             }
         }
 
-
-        private void CreateCameraSettingsList(Control parent,string name, int id)
+        private void CreateCameraDisplay(Control parent, string name, int id)
         {
-            TabPage tp = new TabPage();
-            tp.Text = name;
-            tp.BackColor = Color.White;
-            parent.Controls.Add(tp);
-            
-            /*
-            GroupBox gb = new GroupBox();
-            gb.Text = name;
-            gb.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            gb.AutoSize = true;
-            parent.Controls.Add(gb);
-            */
-            /*
             FlowLayoutPanel flp = new FlowLayoutPanel
             {
                 Text = name,
                 FlowDirection = FlowDirection.TopDown,
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
                 AutoSize = true,
-                Location = new Point(20, 20)
             };
 
-            GroupBox gbExposureTime = new GroupBox();
-            GroupBox gbGain = new GroupBox();
-            GroupBox gbResolution = new GroupBox();
+            PictureBox pb = new PictureBox
+            {
+            };
 
-            gbExposureTime.Name = "Exposure Time";
-            gbGain.Name = "Gain";
-            gbResolution.Name = "Resolution";
+            CamInterface.AssignPictureBox(id, pb);
 
+            flp.Controls.Add(pb);
+            parent.Controls.Add(flp);
+        }
+
+        private void CreateCameraSettingsList(Control parent,string name, int id)
+        {
+
+            Size groupboxSize = new Size(250, 40);
+            Size trackbarSize = new Size(250, 40);
+            TabPage tp = new TabPage();
+            tp.Text = name;
+            tp.BackColor = Color.White;
+            parent.Controls.Add(tp);
             
-            
+            FlowLayoutPanel flp = new FlowLayoutPanel
+            {
+                Text = name,
+                FlowDirection = FlowDirection.TopDown,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                AutoSize = true,
+                Location = new Point(0, 0)
+            };
 
+            GroupBox gbExposureTime = new GroupBox
+            {
+                Text = "Exposure Time",
+                Size = groupboxSize,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowOnly,
+            };
+            GroupBox gbGain = new GroupBox
+            {
+                Text = "Gain",
+                Size = groupboxSize,
+            };
+            GroupBox gbResolution = new GroupBox
+            {
+                Text = "Resolution",
+                Size = groupboxSize,
+            };
+
+            TrackBar tbExposureTime = new TrackBar
+            {
+                Size = trackbarSize,
+                Location = new Point(10, 30),
+            };
 
             tp.Controls.Add(flp);
 
             flp.Controls.Add(gbExposureTime);
             flp.Controls.Add(gbGain);
             flp.Controls.Add(gbResolution);
-            */
 
+            gbExposureTime.Controls.Add(tbExposureTime);
         }
 
         //check boxes changed for camera selection
@@ -153,55 +178,11 @@ namespace CCDApp
             stopCaptureButton.Enabled = true;
             CamInterface.StartFrameGrab(0x8888);
         }
-        private void stopCaptureButton_Click(object sender, EventArgs e)
+        private void stopButton_Click(object sender, EventArgs e)
         {
             captureButton.Enabled = true;
             stopCaptureButton.Enabled = false;
             CamInterface.StopFrameGrab();
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ExposureTimeInput_Scroll(object sender, EventArgs e)
-        {
-            exposureTimeFineControl.Value = (decimal)ExposureTimeInput.Value;
-        }
-
-        private void exposureTimeFineControl_ValueChanged(object sender, EventArgs e)
-        {
-            ExposureTimeInput.Value = (int)exposureTimeFineControl.Value;
-            UpdateExposureTime();
-        }
-
-        private void exposureTimeOoMControl_ValueChanged(object sender, EventArgs e)
-        {
-            exposureTimeFineControl.Value = 0;
-            ExposureTimeInput.Value = 0;
-            UpdateExposureTime();
-        }
-
-        private void gainControlInput_Scroll(object sender, EventArgs e)
-        {
-            gainControl.Value = (decimal)gainControlInput.Value;
-        }
-        private void gainControl_ValueChanged(object sender, EventArgs e)
-        {
-            gainControlInput.Value = (int)gainControl.Value;
-            UpdateGain();
-        }
-
-        private void UpdateExposureTime()
-        {
-            double expTimeMs = (double)exposureTimeFineControl.Value * Math.Pow(10.0, (double)exposureTimeOoMControl.Value + 3);
-            CamInterface.SetExposureTime(expTimeMs);
-        }
-        private void UpdateGain()
-        {
-            int gain = (int)gainControl.Value;
-            CamInterface.SetGain(gain);
         }
 
         private void folderBrowserButton_Click(object sender, EventArgs e)
