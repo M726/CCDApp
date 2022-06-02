@@ -94,7 +94,7 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(8, 8);
             this.flowLayoutPanel1.MinimumSize = new System.Drawing.Size(200, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(366, 486);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(366, 402);
             this.flowLayoutPanel1.TabIndex = 4;
             // 
             // flowLayoutPanel2
@@ -115,7 +115,7 @@
             this.tabControl1.Location = new System.Drawing.Point(3, 53);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(360, 147);
+            this.tabControl1.Size = new System.Drawing.Size(360, 63);
             this.tabControl1.TabIndex = 7;
             // 
             // tabPage2
@@ -125,7 +125,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(352, 121);
+            this.tabPage2.Size = new System.Drawing.Size(352, 37);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Processing Settings";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -133,7 +133,7 @@
             // stopCaptureButton
             // 
             this.stopCaptureButton.Enabled = false;
-            this.stopCaptureButton.Location = new System.Drawing.Point(109, 31);
+            this.stopCaptureButton.Location = new System.Drawing.Point(87, 6);
             this.stopCaptureButton.Name = "stopCaptureButton";
             this.stopCaptureButton.Size = new System.Drawing.Size(75, 23);
             this.stopCaptureButton.TabIndex = 19;
@@ -143,7 +143,7 @@
             // 
             // captureButton
             // 
-            this.captureButton.Location = new System.Drawing.Point(28, 31);
+            this.captureButton.Location = new System.Drawing.Point(6, 6);
             this.captureButton.Name = "captureButton";
             this.captureButton.Size = new System.Drawing.Size(75, 23);
             this.captureButton.TabIndex = 18;
@@ -153,7 +153,7 @@
             // 
             // cameraTabControl
             // 
-            this.cameraTabControl.Location = new System.Drawing.Point(3, 206);
+            this.cameraTabControl.Location = new System.Drawing.Point(3, 122);
             this.cameraTabControl.MinimumSize = new System.Drawing.Size(360, 0);
             this.cameraTabControl.Name = "cameraTabControl";
             this.cameraTabControl.SelectedIndex = 0;
@@ -169,7 +169,7 @@
             this.flowLayoutPanel6.Location = new System.Drawing.Point(12, 12);
             this.flowLayoutPanel6.Name = "flowLayoutPanel6";
             this.flowLayoutPanel6.Padding = new System.Windows.Forms.Padding(5);
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(488, 502);
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(488, 418);
             this.flowLayoutPanel6.TabIndex = 6;
             // 
             // cameraDisplayBox

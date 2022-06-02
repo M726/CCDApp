@@ -71,10 +71,8 @@ namespace CCDApp
                 moduleNumbers[i] = CCDCameras[i].GetModelNumber();
                 serialNumbers[i] = CCDCameras[i].GetSerialNumber();
                 CCDCameras[i].ActivateDevice();
-
-                
-                 
             }
+
             Console.WriteLine(String.Format("{0} Devices Initialized",numDevices));
             StartEngine();
             
@@ -170,7 +168,7 @@ namespace CCDApp
         }
 
 
-        public void SetExposureTime(double expTimeMs)
+        public void SetExposureTime(UInt32 expTimeMs)
         {
             for (int i = 0; i < numDevices; i++)
             {
@@ -179,6 +177,9 @@ namespace CCDApp
         }
         public void SetExposureTime(double expTimeMs, int id)
         {
+            if (expTimeMs < 0) expTimeMs = 1;
+            if (expTimeMs > 200000) expTimeMs = 200000;
+
             CCDCameras[id].SetExposureTime(expTimeMs);
         }
 
@@ -192,6 +193,11 @@ namespace CCDApp
         public void SetGain(int gain, int id)
         {
             CCDCameras[id].SetGain(gain);
+        }
+
+        public void SetDisplayName(string name, int id)
+        {
+            CCDCameras[id].SetDisplayName(name);
         }
 
         /*************************************/

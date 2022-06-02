@@ -41,6 +41,7 @@ namespace CCDApp
                 init.Enabled = true;
 
                 this.cameraTabControl.Controls.Clear();
+                this.cameraDisplayBox.Controls.Clear();
             }
         }
         private void CameraStartup() {
@@ -68,6 +69,14 @@ namespace CCDApp
 
         private void CreateCameraDisplay(Control parent, string name, int id)
         {
+            GroupBox gb = new GroupBox
+            {
+                Text = name,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                Padding = new Padding(10),
+            };
+
             FlowLayoutPanel flp = new FlowLayoutPanel
             {
                 Text = name,
@@ -88,7 +97,7 @@ namespace CCDApp
 
         private void CreateCameraSettingsList(Control parent,string name, int id)
         {
-
+            Point flpInternalLocation = new Point(2, 20);
             Size groupboxSize = new Size(250, 40);
             Size trackbarSize = new Size(250, 40);
             TabPage tp = new TabPage();
@@ -105,37 +114,135 @@ namespace CCDApp
                 Location = new Point(0, 0)
             };
 
+            GroupBox gbDisplayName = new GroupBox
+            {
+                Text = "Display Name",
+                Size = groupboxSize,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowOnly,
+            };
+            FlowLayoutPanel flpDisplayName = new FlowLayoutPanel
+            {
+                Location = flpInternalLocation,
+                FlowDirection = FlowDirection.LeftToRight,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+            };
+            TextBox tbDisplayName = new TextBox
+            {
+                
+            };
+            tbDisplayName.KeyPress += delegate
+            {
+                CamInterface.SetDisplayName(tbDisplayName.Text, id);
+            };
+
+            flpDisplayName.Controls.Add(tbDisplayName);
+            gbDisplayName.Controls.Add(flpDisplayName);
+            flp.Controls.Add(gbDisplayName);
+
+
+            ///////
+            //Exposure Time
             GroupBox gbExposureTime = new GroupBox
             {
                 Text = "Exposure Time",
                 Size = groupboxSize,
                 AutoSize = true,
                 AutoSizeMode = AutoSizeMode.GrowOnly,
+                
             };
-            GroupBox gbGain = new GroupBox
+            FlowLayoutPanel flpExposureTime = new FlowLayoutPanel
             {
-                Text = "Gain",
-                Size = groupboxSize,
-            };
-            GroupBox gbResolution = new GroupBox
-            {
-                Text = "Resolution",
-                Size = groupboxSize,
+                Location = flpInternalLocation,
+                FlowDirection = FlowDirection.LeftToRight,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
             };
 
             TrackBar tbExposureTime = new TrackBar
             {
                 Size = trackbarSize,
-                Location = new Point(10, 30),
+                Maximum = 100,
+                Minimum = 1,
             };
+
+            //Add Exposure Time Event Listener
+            tbExposureTime.ValueChanged += (s, e) => {
+                CamInterface.SetExposureTime((UInt32)tbExposureTime.Value, id);
+                //Console.WriteLine((UInt32)tbExposureTime.Value); //Debug Show Exposure time value on change
+            };
+
+            //Add Exposure Time Controls
+            flpExposureTime.Controls.Add(tbExposureTime);
+            gbExposureTime.Controls.Add(flpExposureTime);
+            flp.Controls.Add(gbExposureTime);
+
+            ///////
+            //Gain
+            GroupBox gbGain = new GroupBox
+            {
+                Text = "Gain",
+                Size = groupboxSize,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowOnly,
+
+            };
+            FlowLayoutPanel flpGain = new FlowLayoutPanel
+            {
+                Location = flpInternalLocation,
+                FlowDirection = FlowDirection.LeftToRight,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+            };
+
+            TrackBar tbGain = new TrackBar
+            {
+                Size = trackbarSize,
+                Minimum = 6,
+                Maximum = 41,
+            };
+
+            //Add Gain Event Listener
+            tbGain.ValueChanged += (s, e) => {
+                CamInterface.SetGain(tbGain.Value, id);
+                //Console.WriteLine((UInt32)tbExposureTime.Value); //Debug Show Exposure time value on change
+            };
+
+            //Add Gain Controls
+            flpGain.Controls.Add(tbGain);
+            gbGain.Controls.Add(flpGain);
+            flp.Controls.Add(gbGain);
+
+
+            
+            ///////
+            //Resolution
+            GroupBox gbResolution = new GroupBox
+            {
+                Text = "Resolution",
+                Size = groupboxSize,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowOnly,
+                
+            };
+            FlowLayoutPanel flpResolution = new FlowLayoutPanel
+            {
+                Location = flpInternalLocation,
+                FlowDirection = FlowDirection.LeftToRight,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+            };
+
+
+            //Add Exposure Time Controls
+            gbResolution.Controls.Add(flpResolution);
+            flp.Controls.Add(gbResolution);
+
 
             tp.Controls.Add(flp);
 
-            flp.Controls.Add(gbExposureTime);
-            flp.Controls.Add(gbGain);
-            flp.Controls.Add(gbResolution);
 
-            gbExposureTime.Controls.Add(tbExposureTime);
         }
 
         //check boxes changed for camera selection
@@ -168,7 +275,6 @@ namespace CCDApp
         private void FormExit(object sender, FormClosingEventArgs e)
         {
             CamInterface.Terminate();
-            //Application.ExitThread();
             //Environment.Exit(Environment.ExitCode);
 
         }
