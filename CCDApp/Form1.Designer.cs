@@ -33,7 +33,7 @@
             this.cameraActivationList = new System.Windows.Forms.CheckedListBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.cameraSettingsTabPage = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.stopCaptureButton = new System.Windows.Forms.Button();
             this.captureButton = new System.Windows.Forms.Button();
@@ -41,11 +41,20 @@
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
             this.cameraDisplayBox = new System.Windows.Forms.FlowLayoutPanel();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.gbImageCapture = new System.Windows.Forms.GroupBox();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.cameraSettingsTabPage.SuspendLayout();
             this.flowLayoutPanel6.SuspendLayout();
+            this.gbImageCapture.SuspendLayout();
+            this.flowLayoutPanel3.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.flowLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // init
@@ -75,7 +84,7 @@
             this.cameraActivationList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.cameraActivationList.CheckOnClick = true;
             this.cameraActivationList.FormattingEnabled = true;
-            this.cameraActivationList.Location = new System.Drawing.Point(3, 32);
+            this.cameraActivationList.Location = new System.Drawing.Point(3, 3);
             this.cameraActivationList.Name = "cameraActivationList";
             this.cameraActivationList.Size = new System.Drawing.Size(183, 15);
             this.cameraActivationList.TabIndex = 2;
@@ -86,15 +95,13 @@
             // 
             this.flowLayoutPanel1.AutoSize = true;
             this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel2);
-            this.flowLayoutPanel1.Controls.Add(this.cameraActivationList);
-            this.flowLayoutPanel1.Controls.Add(this.tabControl1);
+            this.flowLayoutPanel1.Controls.Add(this.cameraSettingsTabPage);
             this.flowLayoutPanel1.Controls.Add(this.cameraTabControl);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(8, 8);
             this.flowLayoutPanel1.MinimumSize = new System.Drawing.Size(200, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(366, 402);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(366, 495);
             this.flowLayoutPanel1.TabIndex = 4;
             // 
             // flowLayoutPanel2
@@ -103,29 +110,29 @@
             this.flowLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel2.Controls.Add(this.init);
             this.flowLayoutPanel2.Controls.Add(this.terminate);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(162, 29);
             this.flowLayoutPanel2.TabIndex = 4;
             // 
-            // tabControl1
+            // cameraSettingsTabPage
             // 
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(3, 53);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(360, 63);
-            this.tabControl1.TabIndex = 7;
+            this.cameraSettingsTabPage.Controls.Add(this.tabPage3);
+            this.cameraSettingsTabPage.Controls.Add(this.tabPage2);
+            this.cameraSettingsTabPage.Controls.Add(this.tabPage1);
+            this.cameraSettingsTabPage.Location = new System.Drawing.Point(3, 3);
+            this.cameraSettingsTabPage.Name = "cameraSettingsTabPage";
+            this.cameraSettingsTabPage.SelectedIndex = 0;
+            this.cameraSettingsTabPage.Size = new System.Drawing.Size(360, 112);
+            this.cameraSettingsTabPage.TabIndex = 7;
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.stopCaptureButton);
-            this.tabPage2.Controls.Add(this.captureButton);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(352, 37);
+            this.tabPage2.Size = new System.Drawing.Size(352, 86);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Processing Settings";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -133,7 +140,7 @@
             // stopCaptureButton
             // 
             this.stopCaptureButton.Enabled = false;
-            this.stopCaptureButton.Location = new System.Drawing.Point(87, 6);
+            this.stopCaptureButton.Location = new System.Drawing.Point(84, 3);
             this.stopCaptureButton.Name = "stopCaptureButton";
             this.stopCaptureButton.Size = new System.Drawing.Size(75, 23);
             this.stopCaptureButton.TabIndex = 19;
@@ -143,7 +150,7 @@
             // 
             // captureButton
             // 
-            this.captureButton.Location = new System.Drawing.Point(6, 6);
+            this.captureButton.Location = new System.Drawing.Point(3, 3);
             this.captureButton.Name = "captureButton";
             this.captureButton.Size = new System.Drawing.Size(75, 23);
             this.captureButton.TabIndex = 18;
@@ -153,11 +160,11 @@
             // 
             // cameraTabControl
             // 
-            this.cameraTabControl.Location = new System.Drawing.Point(3, 122);
+            this.cameraTabControl.Location = new System.Drawing.Point(3, 121);
             this.cameraTabControl.MinimumSize = new System.Drawing.Size(360, 0);
             this.cameraTabControl.Name = "cameraTabControl";
             this.cameraTabControl.SelectedIndex = 0;
-            this.cameraTabControl.Size = new System.Drawing.Size(360, 277);
+            this.cameraTabControl.Size = new System.Drawing.Size(360, 371);
             this.cameraTabControl.TabIndex = 8;
             // 
             // flowLayoutPanel6
@@ -169,7 +176,7 @@
             this.flowLayoutPanel6.Location = new System.Drawing.Point(12, 12);
             this.flowLayoutPanel6.Name = "flowLayoutPanel6";
             this.flowLayoutPanel6.Padding = new System.Windows.Forms.Padding(5);
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(488, 418);
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(488, 511);
             this.flowLayoutPanel6.TabIndex = 6;
             // 
             // cameraDisplayBox
@@ -193,6 +200,68 @@
             this.saveFileDialog1.ValidateNames = false;
             this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
             // 
+            // gbImageCapture
+            // 
+            this.gbImageCapture.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbImageCapture.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.gbImageCapture.Controls.Add(this.flowLayoutPanel3);
+            this.gbImageCapture.Location = new System.Drawing.Point(6, 6);
+            this.gbImageCapture.Name = "gbImageCapture";
+            this.gbImageCapture.Size = new System.Drawing.Size(228, 74);
+            this.gbImageCapture.TabIndex = 9;
+            this.gbImageCapture.TabStop = false;
+            this.gbImageCapture.Text = "Camera Selection";
+            this.gbImageCapture.Enter += new System.EventHandler(this.gbImageCapture_Enter);
+            // 
+            // flowLayoutPanel3
+            // 
+            this.flowLayoutPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowLayoutPanel3.AutoSize = true;
+            this.flowLayoutPanel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanel3.Controls.Add(this.cameraActivationList);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(10, 19);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(189, 21);
+            this.flowLayoutPanel3.TabIndex = 3;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.gbImageCapture);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(352, 86);
+            this.tabPage1.TabIndex = 2;
+            this.tabPage1.Text = "Image Capture";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.flowLayoutPanel4);
+            this.tabPage3.Controls.Add(this.flowLayoutPanel2);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(352, 86);
+            this.tabPage3.TabIndex = 3;
+            this.tabPage3.Text = "Camera Startup";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // flowLayoutPanel4
+            // 
+            this.flowLayoutPanel4.AutoSize = true;
+            this.flowLayoutPanel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanel4.Controls.Add(this.captureButton);
+            this.flowLayoutPanel4.Controls.Add(this.stopCaptureButton);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(3, 35);
+            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(162, 29);
+            this.flowLayoutPanel4.TabIndex = 5;
+            // 
             // CCDAppMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -200,19 +269,24 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1181, 767);
+            this.ClientSize = new System.Drawing.Size(1156, 581);
             this.Controls.Add(this.flowLayoutPanel6);
             this.Name = "CCDAppMain";
             this.Text = "Multiple CCD Controller";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormExit);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
+            this.cameraSettingsTabPage.ResumeLayout(false);
             this.flowLayoutPanel6.ResumeLayout(false);
             this.flowLayoutPanel6.PerformLayout();
+            this.gbImageCapture.ResumeLayout(false);
+            this.gbImageCapture.PerformLayout();
+            this.flowLayoutPanel3.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            this.flowLayoutPanel4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -226,13 +300,18 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl cameraSettingsTabPage;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.FlowLayoutPanel cameraDisplayBox;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.TabControl cameraTabControl;
         private System.Windows.Forms.Button stopCaptureButton;
         private System.Windows.Forms.Button captureButton;
+        private System.Windows.Forms.GroupBox gbImageCapture;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
     }
 }
 

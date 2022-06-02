@@ -211,9 +211,9 @@ namespace CCDApp
             
             Bitmap bmp = new Bitmap(width, height, width,PixelFormat.Format8bppIndexed, bufferPtr);
             bmp.Palette = palette;
-            drawFrame(id, bmp);
+            DrawFrame(id, bmp);
         }
-        public void drawFrame(int id, Bitmap data)
+        public void DrawFrame(int id, Bitmap data)
         {
             IntPtr hBitmap = data.GetHbitmap();
             try
@@ -222,7 +222,7 @@ namespace CCDApp
                 image.Palette = palette; //remap the colors to 0-255 greyscale
 
                 //Find the largest size we can make our image to fit the box, then crop the box to that size
-                Size newSize = new Size(400, 400);// FindCommonSize(image.Size, p[id].Size);
+                Size newSize = FindCommonSize(image.Size, new Size(400,400)); //new Size(400, 400);
 
                 //Set Image
                 pictureBoxes[id].Size = newSize;

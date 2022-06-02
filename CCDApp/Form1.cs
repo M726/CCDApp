@@ -85,9 +85,7 @@ namespace CCDApp
                 AutoSize = true,
             };
 
-            PictureBox pb = new PictureBox
-            {
-            };
+            PictureBox pb = new PictureBox();
 
             CamInterface.AssignPictureBox(id, pb);
 
@@ -299,6 +297,11 @@ namespace CCDApp
         private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             Console.WriteLine(saveFileDialog1.FileName);
+        }
+
+        private void gbImageCapture_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }
