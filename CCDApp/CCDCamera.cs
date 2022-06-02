@@ -9,13 +9,15 @@ namespace CCDApp
 {
     public class CCDCamera
     {
+        private string displayName = "";
+
         private int idx; //1,2,...
         private int row = 1280;
         private int column = 960;
         private int bin = 0;
         private int xStart = 0;
         private int yStart = 0;
-        private int exposureTime = 1000; //250ms
+        private UInt32 exposureTime = 1000; //250ms
         private int redGain = 0;
         private int greenGain = 15;
         private int blueGain = 0;
@@ -124,37 +126,51 @@ namespace CCDApp
             greenGain = gain;
             blueGain = gain;
 
-            UpdateGain();
+            int ret = UpdateGain();
+
+            DebugOutput("Setting Gain: {0}db: {1}", gain, ret);
         }
         public void SetExposureTime(double expTimeMs)
         {
             //from 50us to 200,000ms mapped onto 1-4,000,000
             //increase of 1 = 50us
-            DebugOutput("Setting Exposure Time: {0}ms", expTimeMs);
-            int mappedExposureTime = (int)Math.Round(20.0 * expTimeMs);
+            UInt32 mappedExposureTime = (UInt32)Math.Round(20.0 * expTimeMs);
             exposureTime = mappedExposureTime;
-            UpdateExposureTime();
+            int ret = UpdateExposureTime();
+
+            DebugOutput("Setting Exposure Time: {0}ms: {1}", expTimeMs, ret);
         }
 
-        public void UpdateMode()
+        public void SetDisplayName(string name)
         {
-            BufSetCameraWorkMode(idx, mode);
+            displayName = name;
         }
-        public void UpdateResolution()
+
+        public int UpdateMode()
         {
-            BufSetCustomizedResolution(idx, row, column, bin, 4);
+            return BufSetCameraWorkMode(idx, mode);
         }
-        public void UpdateStartPosition()
+        public int UpdateResolution()
         {
-            BufSetStartPosition(idx, xStart, yStart);
+            return BufSetCustomizedResolution(idx, row, column, bin, 4);
         }
-        public void UpdateGain()
+        public int UpdateStartPosition()
         {
-            BufSetGains(idx, redGain, greenGain, blueGain);
+            return BufSetStartPosition(idx, xStart, yStart);
         }
-        public void UpdateExposureTime()
+        public int UpdateGain()
         {
-            BufSetExposureTime(idx, exposureTime);
+            return BufSetGains(idx, redGain, greenGain, blueGain);
+            
+        }
+        public int UpdateExposureTime()
+        {
+            return BufSetExposureTime(idx, (int)exposureTime);
+        }
+
+        public string GetDisplayName()
+        {
+            return displayName;
         }
 
         public int GetMode()
