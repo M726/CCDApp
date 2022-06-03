@@ -168,6 +168,11 @@ namespace CCDApp
         }
 
 
+        public double GetExposureTime(int id)
+        {
+            return CCDCameras[id].GetExposureTime();
+        }
+
         public void SetExposureTime(UInt32 expTimeMs)
         {
             for (int i = 0; i < numDevices; i++)
@@ -183,6 +188,10 @@ namespace CCDApp
             CCDCameras[id].SetExposureTime(expTimeMs);
         }
 
+        public int GetGain(int id)
+        {
+            return CCDCameras[id].GetGain();
+        }
         public void SetGain(int gain)
         {
             for (int i = 0; i < numDevices; i++)

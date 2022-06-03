@@ -74,11 +74,12 @@ namespace CCDApp
                 Text = name,
                 AutoSize = true,
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
-                Padding = new Padding(10),
+                Padding = new Padding(5),
             };
 
             FlowLayoutPanel flp = new FlowLayoutPanel
             {
+                Location = new Point(70, 70),
                 Text = name,
                 FlowDirection = FlowDirection.TopDown,
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
@@ -88,8 +89,8 @@ namespace CCDApp
             PictureBox pb = new PictureBox();
 
             CamInterface.AssignPictureBox(id, pb);
-
-            flp.Controls.Add(pb);
+            gb.Controls.Add(pb);
+            flp.Controls.Add(gb);
             parent.Controls.Add(flp);
         }
 
@@ -163,6 +164,7 @@ namespace CCDApp
                 Size = trackbarSize,
                 Maximum = 100,
                 Minimum = 1,
+                Value = (int)CamInterface.GetExposureTime(id),
             };
 
             //Add Exposure Time Event Listener
@@ -199,6 +201,7 @@ namespace CCDApp
                 Size = trackbarSize,
                 Minimum = 6,
                 Maximum = 41,
+                Value = CamInterface.GetGain(id),
             };
 
             //Add Gain Event Listener
