@@ -13,6 +13,15 @@ namespace CCDApp
 
     public class USBCamInterface
     {
+
+        public enum ResolutionType
+        {
+            reolution1280x960,
+            reolution640x480,
+            reolution424x320,
+            reolution320x240,
+            reolution320x240bin2,
+        };
         [DllImport("gdi32.dll")]
         public static extern bool DeleteObject(IntPtr hObject);
 
@@ -149,6 +158,28 @@ namespace CCDApp
             Console.WriteLine(String.Format("Stopping Frame Grab {0}", fh));
         }
         
+        public void SetResolution(ResolutionType resolution, int id)
+        {
+            switch (resolution)
+            {
+                case ResolutionType.reolution640x480:
+                    CCDCameras[id].SetResolution(640, 480, 129);
+                    break;
+                case ResolutionType.reolution424x320:
+                    CCDCameras[id].SetResolution(424, 320, 130);
+                    break;
+                case ResolutionType.reolution320x240:
+                    CCDCameras[id].SetResolution(320, 240, 131);
+                    break;
+                case ResolutionType.reolution320x240bin2:
+                    CCDCameras[id].SetResolution(320, 240, 3);
+                    break;
+                default:
+                    CCDCameras[id].SetResolution(1280, 960, 0);
+                    break;
+
+            }
+        }
 
         public void SetGammaValue(int gamma, int contrast, int brightness)
         {

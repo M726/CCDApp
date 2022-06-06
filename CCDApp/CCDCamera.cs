@@ -100,14 +100,17 @@ namespace CCDApp
             }
             UpdateMode();
         }
-        public void SetResolution(int height, int width, int binMode)
+        public void SetResolution(int width, int height, int binMode)
         {
             //width = row size
             row = width;
             column = height;
             bin = binMode;
 
-            UpdateResolution();
+
+            int ret = UpdateResolution();
+
+            DebugOutput("Setting Resolution: {0}x{1}: {2}",width,height, ret);
         }
         public void SetStartPosition(int x, int y)
         {

@@ -32,29 +32,29 @@
             this.terminate = new System.Windows.Forms.Button();
             this.cameraActivationList = new System.Windows.Forms.CheckedListBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.cameraSettingsTabPage = new System.Windows.Forms.TabControl();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.stopCaptureButton = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.captureButton = new System.Windows.Forms.Button();
+            this.stopCaptureButton = new System.Windows.Forms.Button();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.gbImageCapture = new System.Windows.Forms.GroupBox();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.cameraTabControl = new System.Windows.Forms.TabControl();
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
             this.cameraDisplayBox = new System.Windows.Forms.FlowLayoutPanel();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.gbImageCapture = new System.Windows.Forms.GroupBox();
-            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel1.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
             this.cameraSettingsTabPage.SuspendLayout();
-            this.flowLayoutPanel6.SuspendLayout();
-            this.gbImageCapture.SuspendLayout();
-            this.flowLayoutPanel3.SuspendLayout();
-            this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.gbImageCapture.SuspendLayout();
+            this.flowLayoutPanel3.SuspendLayout();
+            this.flowLayoutPanel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // init
@@ -101,8 +101,63 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(8, 8);
             this.flowLayoutPanel1.MinimumSize = new System.Drawing.Size(200, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(366, 495);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(366, 724);
             this.flowLayoutPanel1.TabIndex = 4;
+            // 
+            // cameraSettingsTabPage
+            // 
+            this.cameraSettingsTabPage.Controls.Add(this.tabPage3);
+            this.cameraSettingsTabPage.Controls.Add(this.tabPage2);
+            this.cameraSettingsTabPage.Controls.Add(this.tabPage1);
+            this.cameraSettingsTabPage.Location = new System.Drawing.Point(3, 3);
+            this.cameraSettingsTabPage.Name = "cameraSettingsTabPage";
+            this.cameraSettingsTabPage.SelectedIndex = 0;
+            this.cameraSettingsTabPage.Size = new System.Drawing.Size(360, 112);
+            this.cameraSettingsTabPage.TabIndex = 7;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.flowLayoutPanel4);
+            this.tabPage3.Controls.Add(this.flowLayoutPanel2);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(352, 86);
+            this.tabPage3.TabIndex = 3;
+            this.tabPage3.Text = "Camera Startup";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // flowLayoutPanel4
+            // 
+            this.flowLayoutPanel4.AutoSize = true;
+            this.flowLayoutPanel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanel4.Controls.Add(this.captureButton);
+            this.flowLayoutPanel4.Controls.Add(this.stopCaptureButton);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(3, 35);
+            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(162, 29);
+            this.flowLayoutPanel4.TabIndex = 5;
+            // 
+            // captureButton
+            // 
+            this.captureButton.Location = new System.Drawing.Point(3, 3);
+            this.captureButton.Name = "captureButton";
+            this.captureButton.Size = new System.Drawing.Size(75, 23);
+            this.captureButton.TabIndex = 18;
+            this.captureButton.Text = "Capture";
+            this.captureButton.UseVisualStyleBackColor = true;
+            this.captureButton.Click += new System.EventHandler(this.captureButton_Click);
+            // 
+            // stopCaptureButton
+            // 
+            this.stopCaptureButton.Enabled = false;
+            this.stopCaptureButton.Location = new System.Drawing.Point(84, 3);
+            this.stopCaptureButton.Name = "stopCaptureButton";
+            this.stopCaptureButton.Size = new System.Drawing.Size(75, 23);
+            this.stopCaptureButton.TabIndex = 19;
+            this.stopCaptureButton.Text = "Stop Capture";
+            this.stopCaptureButton.UseVisualStyleBackColor = true;
+            this.stopCaptureButton.Click += new System.EventHandler(this.stopButton_Click);
             // 
             // flowLayoutPanel2
             // 
@@ -116,17 +171,6 @@
             this.flowLayoutPanel2.Size = new System.Drawing.Size(162, 29);
             this.flowLayoutPanel2.TabIndex = 4;
             // 
-            // cameraSettingsTabPage
-            // 
-            this.cameraSettingsTabPage.Controls.Add(this.tabPage3);
-            this.cameraSettingsTabPage.Controls.Add(this.tabPage2);
-            this.cameraSettingsTabPage.Controls.Add(this.tabPage1);
-            this.cameraSettingsTabPage.Location = new System.Drawing.Point(3, 3);
-            this.cameraSettingsTabPage.Name = "cameraSettingsTabPage";
-            this.cameraSettingsTabPage.SelectedIndex = 0;
-            this.cameraSettingsTabPage.Size = new System.Drawing.Size(360, 112);
-            this.cameraSettingsTabPage.TabIndex = 7;
-            // 
             // tabPage2
             // 
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -137,68 +181,16 @@
             this.tabPage2.Text = "Processing Settings";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // stopCaptureButton
+            // tabPage1
             // 
-            this.stopCaptureButton.Enabled = false;
-            this.stopCaptureButton.Location = new System.Drawing.Point(84, 3);
-            this.stopCaptureButton.Name = "stopCaptureButton";
-            this.stopCaptureButton.Size = new System.Drawing.Size(75, 23);
-            this.stopCaptureButton.TabIndex = 19;
-            this.stopCaptureButton.Text = "Stop Capture";
-            this.stopCaptureButton.UseVisualStyleBackColor = true;
-            this.stopCaptureButton.Click += new System.EventHandler(this.stopButton_Click);
-            // 
-            // captureButton
-            // 
-            this.captureButton.Location = new System.Drawing.Point(3, 3);
-            this.captureButton.Name = "captureButton";
-            this.captureButton.Size = new System.Drawing.Size(75, 23);
-            this.captureButton.TabIndex = 18;
-            this.captureButton.Text = "Capture";
-            this.captureButton.UseVisualStyleBackColor = true;
-            this.captureButton.Click += new System.EventHandler(this.captureButton_Click);
-            // 
-            // cameraTabControl
-            // 
-            this.cameraTabControl.Location = new System.Drawing.Point(3, 121);
-            this.cameraTabControl.MinimumSize = new System.Drawing.Size(360, 0);
-            this.cameraTabControl.Name = "cameraTabControl";
-            this.cameraTabControl.SelectedIndex = 0;
-            this.cameraTabControl.Size = new System.Drawing.Size(360, 371);
-            this.cameraTabControl.TabIndex = 8;
-            // 
-            // flowLayoutPanel6
-            // 
-            this.flowLayoutPanel6.AutoSize = true;
-            this.flowLayoutPanel6.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanel6.Controls.Add(this.flowLayoutPanel1);
-            this.flowLayoutPanel6.Controls.Add(this.cameraDisplayBox);
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(12, 12);
-            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Padding = new System.Windows.Forms.Padding(5);
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(488, 511);
-            this.flowLayoutPanel6.TabIndex = 6;
-            // 
-            // cameraDisplayBox
-            // 
-            this.cameraDisplayBox.AutoSize = true;
-            this.cameraDisplayBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.cameraDisplayBox.BackColor = System.Drawing.Color.Transparent;
-            this.cameraDisplayBox.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.cameraDisplayBox.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cameraDisplayBox.Location = new System.Drawing.Point(380, 8);
-            this.cameraDisplayBox.MinimumSize = new System.Drawing.Size(100, 100);
-            this.cameraDisplayBox.Name = "cameraDisplayBox";
-            this.cameraDisplayBox.Size = new System.Drawing.Size(100, 100);
-            this.cameraDisplayBox.TabIndex = 7;
-            // 
-            // saveFileDialog1
-            // 
-            this.saveFileDialog1.AddExtension = false;
-            this.saveFileDialog1.CheckFileExists = true;
-            this.saveFileDialog1.FileName = "$name$__$imageNumber$.bmp";
-            this.saveFileDialog1.ValidateNames = false;
-            this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
+            this.tabPage1.Controls.Add(this.gbImageCapture);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(352, 86);
+            this.tabPage1.TabIndex = 2;
+            this.tabPage1.Text = "Image Capture";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // gbImageCapture
             // 
@@ -228,39 +220,47 @@
             this.flowLayoutPanel3.Size = new System.Drawing.Size(189, 21);
             this.flowLayoutPanel3.TabIndex = 3;
             // 
-            // tabPage1
+            // cameraTabControl
             // 
-            this.tabPage1.Controls.Add(this.gbImageCapture);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(352, 86);
-            this.tabPage1.TabIndex = 2;
-            this.tabPage1.Text = "Image Capture";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.cameraTabControl.Location = new System.Drawing.Point(3, 121);
+            this.cameraTabControl.MinimumSize = new System.Drawing.Size(360, 0);
+            this.cameraTabControl.Name = "cameraTabControl";
+            this.cameraTabControl.SelectedIndex = 0;
+            this.cameraTabControl.Size = new System.Drawing.Size(360, 600);
+            this.cameraTabControl.TabIndex = 8;
             // 
-            // tabPage3
+            // flowLayoutPanel6
             // 
-            this.tabPage3.Controls.Add(this.flowLayoutPanel4);
-            this.tabPage3.Controls.Add(this.flowLayoutPanel2);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(352, 86);
-            this.tabPage3.TabIndex = 3;
-            this.tabPage3.Text = "Camera Startup";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.flowLayoutPanel6.AutoSize = true;
+            this.flowLayoutPanel6.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanel6.Controls.Add(this.flowLayoutPanel1);
+            this.flowLayoutPanel6.Controls.Add(this.cameraDisplayBox);
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(12, 12);
+            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
+            this.flowLayoutPanel6.Padding = new System.Windows.Forms.Padding(5);
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(488, 740);
+            this.flowLayoutPanel6.TabIndex = 6;
             // 
-            // flowLayoutPanel4
+            // cameraDisplayBox
             // 
-            this.flowLayoutPanel4.AutoSize = true;
-            this.flowLayoutPanel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanel4.Controls.Add(this.captureButton);
-            this.flowLayoutPanel4.Controls.Add(this.stopCaptureButton);
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(3, 35);
-            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(162, 29);
-            this.flowLayoutPanel4.TabIndex = 5;
+            this.cameraDisplayBox.AutoSize = true;
+            this.cameraDisplayBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cameraDisplayBox.BackColor = System.Drawing.Color.Transparent;
+            this.cameraDisplayBox.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.cameraDisplayBox.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.cameraDisplayBox.Location = new System.Drawing.Point(380, 8);
+            this.cameraDisplayBox.MinimumSize = new System.Drawing.Size(100, 100);
+            this.cameraDisplayBox.Name = "cameraDisplayBox";
+            this.cameraDisplayBox.Size = new System.Drawing.Size(100, 100);
+            this.cameraDisplayBox.TabIndex = 7;
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.AddExtension = false;
+            this.saveFileDialog1.CheckFileExists = true;
+            this.saveFileDialog1.FileName = "$name$__$imageNumber$.bmp";
+            this.saveFileDialog1.ValidateNames = false;
+            this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
             // 
             // CCDAppMain
             // 
@@ -269,24 +269,24 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1156, 581);
+            this.ClientSize = new System.Drawing.Size(1156, 773);
             this.Controls.Add(this.flowLayoutPanel6);
             this.Name = "CCDAppMain";
             this.Text = "Multiple CCD Controller";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormExit);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel2.ResumeLayout(false);
             this.cameraSettingsTabPage.ResumeLayout(false);
-            this.flowLayoutPanel6.ResumeLayout(false);
-            this.flowLayoutPanel6.PerformLayout();
-            this.gbImageCapture.ResumeLayout(false);
-            this.gbImageCapture.PerformLayout();
-            this.flowLayoutPanel3.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.flowLayoutPanel4.ResumeLayout(false);
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.gbImageCapture.ResumeLayout(false);
+            this.gbImageCapture.PerformLayout();
+            this.flowLayoutPanel3.ResumeLayout(false);
+            this.flowLayoutPanel6.ResumeLayout(false);
+            this.flowLayoutPanel6.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

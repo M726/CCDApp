@@ -86,7 +86,10 @@ namespace CCDApp
                 AutoSize = true,
             };
 
-            PictureBox pb = new PictureBox();
+            PictureBox pb = new PictureBox
+            {
+                
+            };
 
             CamInterface.AssignPictureBox(id, pb);
             gb.Controls.Add(pb);
@@ -140,6 +143,64 @@ namespace CCDApp
             gbDisplayName.Controls.Add(flpDisplayName);
             flp.Controls.Add(gbDisplayName);
 
+
+            ///////
+            //Resolution
+            GroupBox gbResolution = new GroupBox
+            {
+                Text = "Resolution",
+                Size = groupboxSize,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+
+            };
+            FlowLayoutPanel flpResolution = new FlowLayoutPanel
+            {
+                Location = flpInternalLocation,
+                FlowDirection = FlowDirection.TopDown,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+            };
+
+            RadioButton rbResolution1280x960 = new RadioButton
+            {
+                Text = "1280 x 960",
+                AutoSize = true,
+                Checked = true,
+            };
+            RadioButton rbResolution640x480 = new RadioButton
+            {
+                Text = "640 x 480 (1:2 Bin)",
+                AutoSize = true,
+            };
+            RadioButton rbResolution424x320 = new RadioButton
+            {
+                Text = "424 x 320 (1:3 Bin)",
+                AutoSize = true,
+            };
+            RadioButton rbResolution320x240 = new RadioButton
+            {
+                Text = "320 x 240 (1:4 Bin)",
+                AutoSize = true,
+            };
+            RadioButton rbResolution320x240Bin2 = new RadioButton
+            {
+                Text = "320 x 240 (1:4 Bin2)",
+                AutoSize = true,
+            };
+            rbResolution1280x960.CheckedChanged += new EventHandler((sender, e) => resolutionChange(USBCamInterface.ResolutionType.reolution1280x960, id));
+            rbResolution640x480.CheckedChanged += new EventHandler((sender, e) => resolutionChange(USBCamInterface.ResolutionType.reolution640x480, id));
+            rbResolution424x320.CheckedChanged += new EventHandler((sender, e) => resolutionChange(USBCamInterface.ResolutionType.reolution424x320, id));
+            rbResolution320x240.CheckedChanged += new EventHandler((sender, e) => resolutionChange(USBCamInterface.ResolutionType.reolution320x240, id));
+            rbResolution320x240Bin2.CheckedChanged += new EventHandler((sender, e) => resolutionChange(USBCamInterface.ResolutionType.reolution320x240bin2, id));
+
+            flpResolution.Controls.Add(rbResolution1280x960);
+            flpResolution.Controls.Add(rbResolution640x480);
+            flpResolution.Controls.Add(rbResolution424x320);
+            flpResolution.Controls.Add(rbResolution320x240);
+            flpResolution.Controls.Add(rbResolution320x240Bin2);
+            gbResolution.Controls.Add(flpResolution);
+            flp.Controls.Add(gbResolution);
 
             ///////
             //Exposure Time
@@ -217,23 +278,6 @@ namespace CCDApp
 
 
             
-            ///////
-            //Resolution
-            GroupBox gbResolution = new GroupBox
-            {
-                Text = "Resolution",
-                Size = groupboxSize,
-                AutoSize = true,
-                AutoSizeMode = AutoSizeMode.GrowOnly,
-                
-            };
-            FlowLayoutPanel flpResolution = new FlowLayoutPanel
-            {
-                Location = flpInternalLocation,
-                FlowDirection = FlowDirection.LeftToRight,
-                AutoSize = true,
-                AutoSizeMode = AutoSizeMode.GrowAndShrink,
-            };
 
 
             //Add Exposure Time Controls
@@ -244,6 +288,11 @@ namespace CCDApp
             tp.Controls.Add(flp);
 
 
+        }
+
+        private void resolutionChange(USBCamInterface.ResolutionType resolution, int id)
+        {
+            CamInterface.SetResolution(resolution, id);
         }
 
         //check boxes changed for camera selection
