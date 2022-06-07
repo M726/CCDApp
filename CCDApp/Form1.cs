@@ -62,6 +62,7 @@ namespace CCDApp
             {
                 //TODO: need to remove these on termination so there arent duplicates
                 //CreateCameraSettingsList(this.captureSettingsFlowContainer, cameraList[i]);
+                cameraActivationList.SetItemChecked(i, true);
                 CreateCameraSettingsList(this.cameraTabControl,cameraList[i], i);
                 CreateCameraDisplay(this.cameraDisplayBox, cameraList[i], i);
             }
@@ -88,16 +89,18 @@ namespace CCDApp
 
             PictureBox pb = new PictureBox
             {
-                
+                Margin = new Padding(5,5,5,0),
+                Location = new Point(10,15),
             };
 
             CamInterface.AssignPictureBox(id, pb);
+
             gb.Controls.Add(pb);
             flp.Controls.Add(gb);
             parent.Controls.Add(flp);
         }
 
-        private void CreateCameraSettingsList(Control parent,string name, int id)
+        private void CreateCameraSettingsList(TabControl parent,string name, int id)
         {
             Point flpInternalLocation = new Point(2, 20);
             Size groupboxSize = new Size(250, 40);
@@ -116,6 +119,10 @@ namespace CCDApp
                 Location = new Point(0, 0)
             };
 
+
+            ///////
+            //DisplayName
+
             GroupBox gbDisplayName = new GroupBox
             {
                 Text = "Display Name",
@@ -132,7 +139,7 @@ namespace CCDApp
             };
             TextBox tbDisplayName = new TextBox
             {
-                
+                Text = String.Format("Camera{0}", id+1),
             };
             tbDisplayName.KeyPress += delegate
             {
@@ -199,6 +206,7 @@ namespace CCDApp
             flpResolution.Controls.Add(rbResolution424x320);
             flpResolution.Controls.Add(rbResolution320x240);
             flpResolution.Controls.Add(rbResolution320x240Bin2);
+
             gbResolution.Controls.Add(flpResolution);
             flp.Controls.Add(gbResolution);
 
@@ -218,14 +226,16 @@ namespace CCDApp
                 FlowDirection = FlowDirection.LeftToRight,
                 AutoSize = true,
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                Margin = new Padding(0),
+                Padding = new Padding(0),
             };
-
             TrackBar tbExposureTime = new TrackBar
             {
                 Size = trackbarSize,
                 Maximum = 100,
                 Minimum = 1,
                 Value = (int)CamInterface.GetExposureTime(id),
+                Margin = new Padding(0),
             };
 
             //Add Exposure Time Event Listener
@@ -295,28 +305,7 @@ namespace CCDApp
             CamInterface.SetResolution(resolution, id);
         }
 
-        //check boxes changed for camera selection
-        private void cameraActivationList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void flowLayoutPanel4_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
 
         }
@@ -341,19 +330,24 @@ namespace CCDApp
             CamInterface.StopFrameGrab();
         }
 
-        private void folderBrowserButton_Click(object sender, EventArgs e)
-        {
-            saveFileDialog1.ShowDialog();
-        }
-
-        private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
-        {
-            Console.WriteLine(saveFileDialog1.FileName);
-        }
-
         private void gbImageCapture_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void folderBrowserOpen_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = folderBrowserDialog1.ShowDialog();
+            Console.WriteLine(dr.ToString());
+            if(dr == DialogResult.OK)
+            {
+                folderTextBox.Text = folderBrowserDialog1.SelectedPath;
+            }
+        }
+
+        private void saveDirectoryChanged(object sender, EventArgs e)
+        {
+            CamInterface.path = folderTextBox.Text;
         }
     }
 }
