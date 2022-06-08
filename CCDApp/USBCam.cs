@@ -40,6 +40,9 @@ namespace CCDApp
         public CCDCamera[] CCDCameras;
 
         public string path;
+
+        public int[] frameCaptureNumber;
+        public int[] frameCaptureNumberMax;
         
         private ColorPalette palette;
         public USBCamInterface(IntPtr handle)
@@ -48,7 +51,6 @@ namespace CCDApp
             palette = new GreyscaleFormat8bpp().GreyScale8bpp;
             windowHandle = handle;
             frameDelegate = new FrameCallbackDelegate(FrameCallback);
-            frameSaveDelegate = new FrameCallbackDelegate(FrameSaveCallback);
         }
 
 
@@ -76,6 +78,10 @@ namespace CCDApp
             moduleNumbers = new string[numDevices];
             CCDCameras = new CCDCamera[numDevices];
             pictureBoxes = new PictureBox[numDevices];
+
+            frameCaptureNumber = new int[numDevices];
+            frameCaptureNumberMax = new int[numDevices];
+
             for (int i = 0; i < numDevices; i++)
             {
                 CCDCameras[i] = new CCDCamera(i + 1);
@@ -84,6 +90,9 @@ namespace CCDApp
                 moduleNumbers[i] = CCDCameras[i].GetModelNumber();
                 serialNumbers[i] = CCDCameras[i].GetSerialNumber();
                 CCDCameras[i].ActivateDevice();
+
+                frameCaptureNumber[i] = 0;
+                frameCaptureNumberMax[i] = 0;
             }
 
             Console.WriteLine(String.Format("{0} Devices Initialized",numDevices));
@@ -152,7 +161,7 @@ namespace CCDApp
         {
             //BufInstallFrameHooker( 0, frameDelegate); //Raw data.
             int fh = BufInstallFrameHooker(1, frameDelegate); // BMP data
-            int fg = BufStartFrameGrab(30);// totalFrames);
+            int fg = BufStartFrameGrab(totalFrames);// totalFrames);
             Console.WriteLine(String.Format("Starting Frame Grab. {2} Frames. {0} {1}", fh, fh, totalFrames));
         }
 
@@ -267,53 +276,19 @@ namespace CCDApp
                 Palette = palette
             };
             DrawFrame(id, bmp);
+
         }
 
-        public void FrameSaveCallback( ref ImageProperty imgProperty, IntPtr bufferPtr)
+        public void CaptureFrames(int id, int frames, string path)
         {
-            int id = imgProperty.CameraID - 1;
-            int width = imgProperty.Column;
-            int height = imgProperty.Row;
-
-            Bitmap bmp = new Bitmap(width, height, width, PixelFormat.Format8bppIndexed, bufferPtr)
-            {
-                Palette = palette
-            };
-            //SaveFrame(id, bmp);
-        }
-
-        public void SaveFrame(int id, Bitmap data, int frameNumber)
-        {
-            IntPtr hBitmap = data.GetHbitmap();
-            try
-            {
-                Bitmap image = Image.FromHbitmap(hBitmap);
-
-                
-                //image.Save(String.Format("{0}\\{1}_{2}.bmp", path, CCDCameras[id].GetDisplayName(), frameNumber));
-
-                image.Palette = palette; //remap the colors to 0-255 greyscale
-
-                //Find the largest size we can make our image to fit the box, then crop the box to that size
-                Size newSize = FindCommonSize(image.Size, new Size(400, 400)); //new Size(400, 400);
-
-                //Set Image
-                pictureBoxes[id].Size = newSize;
-                pictureBoxes[id].Image = new Bitmap(image, newSize);
-
-                image.Dispose();
-                data.Dispose();
-
-                GC.Collect();
-            }
-            finally
-            {
-                DeleteObject(hBitmap); //Very important otherwise massive memory leak
-            }
+            frameCaptureNumber[id] = frames;
+            frameCaptureNumberMax[id] = frames;
+            this.path = path;
         }
 
 
-        public void DrawFrame(int id, Bitmap data)
+
+        private void DrawFrame(int id, Bitmap data)
         {
             IntPtr hBitmap = data.GetHbitmap();
             try
@@ -327,7 +302,15 @@ namespace CCDApp
                 //Set Image
                 pictureBoxes[id].Size = newSize;
                 pictureBoxes[id].Image = new Bitmap(image, newSize);
-                
+
+
+
+                if (frameCaptureNumber[id] > 0)
+                {
+                    image.Save(String.Format("{0}\\{1}_{2}.bmp", path, CCDCameras[id].GetDisplayName(), frameCaptureNumberMax[id] - frameCaptureNumber[id]));
+                    frameCaptureNumber[id]--;
+                }
+
                 image.Dispose();
                 data.Dispose();
 

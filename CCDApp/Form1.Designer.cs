@@ -32,14 +32,15 @@
             this.terminate = new System.Windows.Forms.Button();
             this.cameraActivationList = new System.Windows.Forms.CheckedListBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.cameraSettingsTabPage = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.captureButton = new System.Windows.Forms.Button();
             this.stopCaptureButton = new System.Windows.Forms.Button();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.folderTextBox = new System.Windows.Forms.TextBox();
             this.folderBrowserOpen = new System.Windows.Forms.Button();
             this.gbCaptureButton = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -47,24 +48,23 @@
             this.captureActivate = new System.Windows.Forms.Button();
             this.gbImageCapture = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.cameraTabControl = new System.Windows.Forms.TabControl();
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
             this.cameraDisplayBox = new System.Windows.Forms.FlowLayoutPanel();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.folderTextBox = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel1.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
             this.cameraSettingsTabPage.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbCaptureButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.frameCountSelector)).BeginInit();
             this.gbImageCapture.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel6.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // init
@@ -114,6 +114,18 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(366, 710);
             this.flowLayoutPanel1.TabIndex = 4;
             // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.AutoSize = true;
+            this.flowLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanel2.Controls.Add(this.init);
+            this.flowLayoutPanel2.Controls.Add(this.terminate);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(162, 29);
+            this.flowLayoutPanel2.TabIndex = 4;
+            // 
             // cameraSettingsTabPage
             // 
             this.cameraSettingsTabPage.Controls.Add(this.tabPage3);
@@ -137,6 +149,16 @@
             this.tabPage3.TabIndex = 3;
             this.tabPage3.Text = "Camera Startup";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.flowLayoutPanel4);
+            this.groupBox2.Location = new System.Drawing.Point(6, 6);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(340, 59);
+            this.groupBox2.TabIndex = 12;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "groupBox2";
             // 
             // flowLayoutPanel4
             // 
@@ -170,28 +192,6 @@
             this.stopCaptureButton.UseVisualStyleBackColor = true;
             this.stopCaptureButton.Click += new System.EventHandler(this.stopButton_Click);
             // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.AutoSize = true;
-            this.flowLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanel2.Controls.Add(this.init);
-            this.flowLayoutPanel2.Controls.Add(this.terminate);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(162, 29);
-            this.flowLayoutPanel2.TabIndex = 4;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(352, 146);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Processing Settings";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.folderTextBox);
@@ -202,6 +202,14 @@
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Save Directory";
+            // 
+            // folderTextBox
+            // 
+            this.folderTextBox.Location = new System.Drawing.Point(9, 19);
+            this.folderTextBox.Name = "folderTextBox";
+            this.folderTextBox.Size = new System.Drawing.Size(296, 20);
+            this.folderTextBox.TabIndex = 4;
+            this.folderTextBox.TextChanged += new System.EventHandler(this.saveDirectoryChanged);
             // 
             // folderBrowserOpen
             // 
@@ -266,6 +274,7 @@
             this.captureActivate.TabIndex = 0;
             this.captureActivate.Text = "Start Capture";
             this.captureActivate.UseVisualStyleBackColor = true;
+            this.captureActivate.Click += new System.EventHandler(this.captureActivate_Click);
             // 
             // gbImageCapture
             // 
@@ -289,6 +298,16 @@
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
             this.flowLayoutPanel3.Size = new System.Drawing.Size(196, 54);
             this.flowLayoutPanel3.TabIndex = 3;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(352, 214);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Processing Settings";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // cameraTabControl
             // 
@@ -324,24 +343,6 @@
             this.cameraDisplayBox.Size = new System.Drawing.Size(10, 10);
             this.cameraDisplayBox.TabIndex = 7;
             // 
-            // folderTextBox
-            // 
-            this.folderTextBox.Location = new System.Drawing.Point(9, 19);
-            this.folderTextBox.Name = "folderTextBox";
-            this.folderTextBox.Size = new System.Drawing.Size(296, 20);
-            this.folderTextBox.TabIndex = 4;
-            this.folderTextBox.TextChanged += new System.EventHandler(this.saveDirectoryChanged);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.flowLayoutPanel4);
-            this.groupBox2.Location = new System.Drawing.Point(6, 6);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(340, 59);
-            this.groupBox2.TabIndex = 12;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
-            // 
             // CCDAppMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -357,10 +358,12 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
+            this.flowLayoutPanel2.ResumeLayout(false);
             this.cameraSettingsTabPage.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.flowLayoutPanel4.ResumeLayout(false);
-            this.flowLayoutPanel2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.gbCaptureButton.ResumeLayout(false);
@@ -370,8 +373,6 @@
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel6.ResumeLayout(false);
             this.flowLayoutPanel6.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

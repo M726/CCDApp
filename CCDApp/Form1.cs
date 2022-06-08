@@ -110,6 +110,8 @@ namespace CCDApp
             tp.BackColor = Color.White;
             parent.Controls.Add(tp);
             
+
+
             FlowLayoutPanel flp = new FlowLayoutPanel
             {
                 Text = name,
@@ -137,10 +139,12 @@ namespace CCDApp
                 AutoSize = true,
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
             };
+
             TextBox tbDisplayName = new TextBox
             {
                 Text = String.Format("Camera{0}", id+1),
             };
+
             tbDisplayName.KeyPress += delegate
             {
                 CamInterface.SetDisplayName(tbDisplayName.Text, id);
@@ -150,6 +154,7 @@ namespace CCDApp
             gbDisplayName.Controls.Add(flpDisplayName);
             flp.Controls.Add(gbDisplayName);
 
+            CamInterface.SetDisplayName(tbDisplayName.Text, id);
 
             ///////
             //Resolution
@@ -348,6 +353,17 @@ namespace CCDApp
         private void saveDirectoryChanged(object sender, EventArgs e)
         {
             CamInterface.path = folderTextBox.Text;
+        }
+
+        private void captureActivate_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < cameraActivationList.Items.Count; i++)
+            {
+                if (cameraActivationList.GetItemChecked(i))
+                {
+                    CamInterface.CaptureFrames(i, (int)Math.Round(frameCountSelector.Value), folderTextBox.Text);
+                }
+            }
         }
     }
 }
