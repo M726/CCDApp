@@ -365,5 +365,11 @@ namespace CCDApp
                 }
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            TriggerConfigurationWindow tcw = new TriggerConfigurationWindow();
+            tcw.Show();
+        }
     }
 }
