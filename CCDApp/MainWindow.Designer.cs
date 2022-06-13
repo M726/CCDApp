@@ -112,6 +112,7 @@
             this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel2);
             this.flowLayoutPanel1.Controls.Add(this.cameraSettingsTabPage);
             this.flowLayoutPanel1.Controls.Add(this.cameraTabControl);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(8, 8);
             this.flowLayoutPanel1.MinimumSize = new System.Drawing.Size(200, 0);
@@ -373,12 +374,13 @@
             this.cameraDisplayBox.AutoSize = true;
             this.cameraDisplayBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.cameraDisplayBox.BackColor = System.Drawing.Color.Transparent;
+            this.cameraDisplayBox.Dock = System.Windows.Forms.DockStyle.Right;
             this.cameraDisplayBox.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.cameraDisplayBox.ForeColor = System.Drawing.SystemColors.ControlText;
             this.cameraDisplayBox.Location = new System.Drawing.Point(380, 8);
             this.cameraDisplayBox.MinimumSize = new System.Drawing.Size(10, 10);
             this.cameraDisplayBox.Name = "cameraDisplayBox";
-            this.cameraDisplayBox.Size = new System.Drawing.Size(10, 10);
+            this.cameraDisplayBox.Size = new System.Drawing.Size(10, 717);
             this.cameraDisplayBox.TabIndex = 7;
             // 
             // flowLayoutPanel6
