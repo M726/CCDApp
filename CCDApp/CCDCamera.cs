@@ -52,6 +52,7 @@ namespace CCDApp
                     //success
                     modelNumber = moduleNoRtn.ToString();
                     serialNumber = serialNoRtn.ToString();
+                    
                     Console.WriteLine(String.Format("CCD{0} {1}{2} Initialized", idx, GetModelNumber(), GetSerialNumber()));
                     break;
                 default:

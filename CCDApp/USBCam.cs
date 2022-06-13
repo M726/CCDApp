@@ -35,7 +35,6 @@ namespace CCDApp
 
         private IntPtr windowHandle;
         public FrameCallbackDelegate frameDelegate;
-        public FrameCallbackDelegate frameSaveDelegate;
 
         public CCDCamera[] CCDCameras;
 
@@ -43,6 +42,7 @@ namespace CCDApp
 
         public int[] frameCaptureNumber;
         public int[] frameCaptureNumberMax;
+        public int[] frameCaptureRemaining;
         
         private ColorPalette palette;
         public USBCamInterface(IntPtr handle)
@@ -81,6 +81,7 @@ namespace CCDApp
 
             frameCaptureNumber = new int[numDevices];
             frameCaptureNumberMax = new int[numDevices];
+            frameCaptureRemaining = new int[numDevices];
 
             for (int i = 0; i < numDevices; i++)
             {
@@ -93,6 +94,8 @@ namespace CCDApp
 
                 frameCaptureNumber[i] = 0;
                 frameCaptureNumberMax[i] = 0;
+                frameCaptureRemaining[i] = 0;
+
             }
 
             Console.WriteLine(String.Format("{0} Devices Initialized",numDevices));
@@ -162,15 +165,11 @@ namespace CCDApp
             //BufInstallFrameHooker( 0, frameDelegate); //Raw data.
             int fh = BufInstallFrameHooker(1, frameDelegate); // BMP data
             int fg = BufStartFrameGrab(totalFrames);// totalFrames);
+            for (int i = 0; i < frameCaptureRemaining.Length; i++)
+            {
+                frameCaptureRemaining[i] = totalFrames;
+            }
             Console.WriteLine(String.Format("Starting Frame Grab. {2} Frames. {0} {1}", fh, fh, totalFrames));
-        }
-
-        public void StartFrameCapture(int totalFrames)
-        {
-            StopFrameGrab();
-            int fh = BufInstallFrameHooker(1, frameSaveDelegate); // BMP data
-            int fg = BufStartFrameGrab(totalFrames);
-            Console.WriteLine(String.Format("Starting Frame Capture. {2} Frames. {0} {1}", fh, fh, totalFrames));
         }
 
         public void StopFrameGrab()
@@ -178,6 +177,10 @@ namespace CCDApp
             // Install frame call back.
             int fh = BufInstallFrameHooker(1, null); // BMP data
             Console.WriteLine(String.Format("Stopping Frame Grab {0}", fh));
+            for(int i = 0; i < frameCaptureRemaining.Length; i++)
+            {
+                frameCaptureRemaining[i] = 0;
+            }
         }
         
         public void SetResolution(ResolutionType resolution, int id)
@@ -216,7 +219,6 @@ namespace CCDApp
         }
         public void SetShowMode(bool horzMirror, bool vertFlip)
         {
-
             BufSetBWMode(1, horzMirror ? 1 : 0, vertFlip ? 1 : 0);
         }
 
@@ -262,6 +264,20 @@ namespace CCDApp
             CCDCameras[id].SetDisplayName(name);
         }
 
+        public void SetContinuousMode(int id, bool continuous)
+        {
+            CCDCameras[id].SetContinuousMode(continuous);
+        }
+        public void SetContinuousMode(bool continuous)
+        {
+            for(int i = 0; i < CCDCameras.Length; i++)
+            {
+                SetContinuousMode(i, continuous);
+
+                //BufSetGPIOConfig(i, byte.MaxValue);
+            }
+        }
+
         /*************************************/
         //Memory Mangment & Buffer Processing//
         /*************************************/
@@ -275,6 +291,7 @@ namespace CCDApp
             {
                 Palette = palette
             };
+            frameCaptureRemaining[id]--;
             DrawFrame(id, bmp);
 
         }
@@ -284,6 +301,12 @@ namespace CCDApp
             frameCaptureNumber[id] = frames;
             frameCaptureNumberMax[id] = frames;
             this.path = path;
+            if(frameCaptureRemaining[id] < frames)
+            {
+                Console.WriteLine(String.Format("Frames {0}/{1}. Restarting Capture", frameCaptureRemaining[id], frames));
+                StopFrameGrab();
+                StartFrameGrab(frames*numDevices);
+            }
         }
 
 

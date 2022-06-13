@@ -37,8 +37,8 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.captureModeRadioButton = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.RbCaptureModeTrigger = new System.Windows.Forms.RadioButton();
+            this.RbCaptureModeContinuous = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.captureButton = new System.Windows.Forms.Button();
@@ -54,9 +54,9 @@
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.cameraTabControl = new System.Windows.Forms.TabControl();
-            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
             this.cameraDisplayBox = new System.Windows.Forms.FlowLayoutPanel();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.cameraSettingsTabPage.SuspendLayout();
@@ -159,8 +159,8 @@
             // captureModeRadioButton
             // 
             this.captureModeRadioButton.Controls.Add(this.button1);
-            this.captureModeRadioButton.Controls.Add(this.radioButton2);
-            this.captureModeRadioButton.Controls.Add(this.radioButton1);
+            this.captureModeRadioButton.Controls.Add(this.RbCaptureModeTrigger);
+            this.captureModeRadioButton.Controls.Add(this.RbCaptureModeContinuous);
             this.captureModeRadioButton.Location = new System.Drawing.Point(6, 6);
             this.captureModeRadioButton.Name = "captureModeRadioButton";
             this.captureModeRadioButton.Size = new System.Drawing.Size(159, 68);
@@ -176,29 +176,29 @@
             this.button1.TabIndex = 7;
             this.button1.Text = "Configure";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
-            // radioButton2
+            // RbCaptureModeTrigger
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(9, 19);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(58, 17);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.Text = "Trigger";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.RbCaptureModeTrigger.AutoSize = true;
+            this.RbCaptureModeTrigger.Location = new System.Drawing.Point(9, 19);
+            this.RbCaptureModeTrigger.Name = "RbCaptureModeTrigger";
+            this.RbCaptureModeTrigger.Size = new System.Drawing.Size(58, 17);
+            this.RbCaptureModeTrigger.TabIndex = 1;
+            this.RbCaptureModeTrigger.Text = "Trigger";
+            this.RbCaptureModeTrigger.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // RbCaptureModeContinuous
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(9, 42);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(78, 17);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Continuous";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.RbCaptureModeContinuous.AutoSize = true;
+            this.RbCaptureModeContinuous.Checked = true;
+            this.RbCaptureModeContinuous.Location = new System.Drawing.Point(9, 42);
+            this.RbCaptureModeContinuous.Name = "RbCaptureModeContinuous";
+            this.RbCaptureModeContinuous.Size = new System.Drawing.Size(78, 17);
+            this.RbCaptureModeContinuous.TabIndex = 0;
+            this.RbCaptureModeContinuous.TabStop = true;
+            this.RbCaptureModeContinuous.Text = "Continuous";
+            this.RbCaptureModeContinuous.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -229,7 +229,7 @@
             this.captureButton.TabIndex = 18;
             this.captureButton.Text = "Capture";
             this.captureButton.UseVisualStyleBackColor = true;
-            this.captureButton.Click += new System.EventHandler(this.captureButton_Click);
+            this.captureButton.Click += new System.EventHandler(this.CaptureButton_Click);
             // 
             // stopCaptureButton
             // 
@@ -240,7 +240,7 @@
             this.stopCaptureButton.TabIndex = 19;
             this.stopCaptureButton.Text = "Stop Capture";
             this.stopCaptureButton.UseVisualStyleBackColor = true;
-            this.stopCaptureButton.Click += new System.EventHandler(this.stopButton_Click);
+            this.stopCaptureButton.Click += new System.EventHandler(this.StopButton_Click);
             // 
             // groupBox1
             // 
@@ -259,7 +259,7 @@
             this.folderTextBox.Name = "folderTextBox";
             this.folderTextBox.Size = new System.Drawing.Size(296, 20);
             this.folderTextBox.TabIndex = 4;
-            this.folderTextBox.TextChanged += new System.EventHandler(this.saveDirectoryChanged);
+            this.folderTextBox.TextChanged += new System.EventHandler(this.SaveDirectoryChanged);
             // 
             // folderBrowserOpen
             // 
@@ -271,7 +271,7 @@
             this.folderBrowserOpen.TabIndex = 3;
             this.folderBrowserOpen.Text = "...";
             this.folderBrowserOpen.UseVisualStyleBackColor = true;
-            this.folderBrowserOpen.Click += new System.EventHandler(this.folderBrowserOpen_Click);
+            this.folderBrowserOpen.Click += new System.EventHandler(this.FolderBrowserOpen_Click);
             // 
             // gbCaptureButton
             // 
@@ -324,7 +324,7 @@
             this.captureActivate.TabIndex = 0;
             this.captureActivate.Text = "Start Capture";
             this.captureActivate.UseVisualStyleBackColor = true;
-            this.captureActivate.Click += new System.EventHandler(this.captureActivate_Click);
+            this.captureActivate.Click += new System.EventHandler(this.CaptureActivate_Click);
             // 
             // gbImageCapture
             // 
@@ -336,7 +336,7 @@
             this.gbImageCapture.TabIndex = 9;
             this.gbImageCapture.TabStop = false;
             this.gbImageCapture.Text = "Camera Selection";
-            this.gbImageCapture.Enter += new System.EventHandler(this.gbImageCapture_Enter);
+            this.gbImageCapture.Enter += new System.EventHandler(this.GbImageCapture_Enter);
             // 
             // flowLayoutPanel3
             // 
@@ -368,18 +368,6 @@
             this.cameraTabControl.Size = new System.Drawing.Size(360, 429);
             this.cameraTabControl.TabIndex = 8;
             // 
-            // flowLayoutPanel6
-            // 
-            this.flowLayoutPanel6.AutoSize = true;
-            this.flowLayoutPanel6.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanel6.Controls.Add(this.flowLayoutPanel1);
-            this.flowLayoutPanel6.Controls.Add(this.cameraDisplayBox);
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(12, 12);
-            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Padding = new System.Windows.Forms.Padding(5);
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(398, 733);
-            this.flowLayoutPanel6.TabIndex = 6;
-            // 
             // cameraDisplayBox
             // 
             this.cameraDisplayBox.AutoSize = true;
@@ -392,6 +380,19 @@
             this.cameraDisplayBox.Name = "cameraDisplayBox";
             this.cameraDisplayBox.Size = new System.Drawing.Size(10, 10);
             this.cameraDisplayBox.TabIndex = 7;
+            // 
+            // flowLayoutPanel6
+            // 
+            this.flowLayoutPanel6.AutoSize = true;
+            this.flowLayoutPanel6.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanel6.Controls.Add(this.flowLayoutPanel1);
+            this.flowLayoutPanel6.Controls.Add(this.cameraDisplayBox);
+            this.flowLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
+            this.flowLayoutPanel6.Padding = new System.Windows.Forms.Padding(5);
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(1156, 773);
+            this.flowLayoutPanel6.TabIndex = 6;
             // 
             // CCDAppMain
             // 
@@ -437,7 +438,6 @@
         private System.Windows.Forms.CheckedListBox cameraActivationList;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
         private System.Windows.Forms.TabControl cameraSettingsTabPage;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.FlowLayoutPanel cameraDisplayBox;
@@ -458,9 +458,10 @@
         private System.Windows.Forms.TextBox folderTextBox;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox captureModeRadioButton;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton RbCaptureModeTrigger;
+        private System.Windows.Forms.RadioButton RbCaptureModeContinuous;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
     }
 }
 

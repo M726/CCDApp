@@ -25,7 +25,17 @@ namespace CCDApp
             
             CamInterface = new USBCamInterface(this.Handle);
             CameraStartup();
-            
+
+            RbCaptureModeTrigger.CheckedChanged += delegate
+            {
+                if (RbCaptureModeTrigger.Checked)
+                    CamInterface.SetContinuousMode(false);
+            };
+            RbCaptureModeContinuous.CheckedChanged += delegate {
+                if (RbCaptureModeContinuous.Checked)
+                    CamInterface.SetContinuousMode(true);
+            };
+
         }
 
         private void init_Click(object sender, EventArgs e)
@@ -200,11 +210,11 @@ namespace CCDApp
                 Text = "320 x 240 (1:4 Bin2)",
                 AutoSize = true,
             };
-            rbResolution1280x960.CheckedChanged += new EventHandler((sender, e) => resolutionChange(USBCamInterface.ResolutionType.reolution1280x960, id));
-            rbResolution640x480.CheckedChanged += new EventHandler((sender, e) => resolutionChange(USBCamInterface.ResolutionType.reolution640x480, id));
-            rbResolution424x320.CheckedChanged += new EventHandler((sender, e) => resolutionChange(USBCamInterface.ResolutionType.reolution424x320, id));
-            rbResolution320x240.CheckedChanged += new EventHandler((sender, e) => resolutionChange(USBCamInterface.ResolutionType.reolution320x240, id));
-            rbResolution320x240Bin2.CheckedChanged += new EventHandler((sender, e) => resolutionChange(USBCamInterface.ResolutionType.reolution320x240bin2, id));
+            rbResolution1280x960.CheckedChanged += new EventHandler((sender, e) => ResolutionChange(USBCamInterface.ResolutionType.reolution1280x960, id));
+            rbResolution640x480.CheckedChanged += new EventHandler((sender, e) => ResolutionChange(USBCamInterface.ResolutionType.reolution640x480, id));
+            rbResolution424x320.CheckedChanged += new EventHandler((sender, e) => ResolutionChange(USBCamInterface.ResolutionType.reolution424x320, id));
+            rbResolution320x240.CheckedChanged += new EventHandler((sender, e) => ResolutionChange(USBCamInterface.ResolutionType.reolution320x240, id));
+            rbResolution320x240Bin2.CheckedChanged += new EventHandler((sender, e) => ResolutionChange(USBCamInterface.ResolutionType.reolution320x240bin2, id));
 
             flpResolution.Controls.Add(rbResolution1280x960);
             flpResolution.Controls.Add(rbResolution640x480);
@@ -305,7 +315,7 @@ namespace CCDApp
 
         }
 
-        private void resolutionChange(USBCamInterface.ResolutionType resolution, int id)
+        private void ResolutionChange(USBCamInterface.ResolutionType resolution, int id)
         {
             CamInterface.SetResolution(resolution, id);
         }
@@ -322,25 +332,25 @@ namespace CCDApp
             //Environment.Exit(Environment.ExitCode);
 
         }
-        private void captureButton_Click(object sender, EventArgs e)
+        private void CaptureButton_Click(object sender, EventArgs e)
         {
             captureButton.Enabled = false;
             stopCaptureButton.Enabled = true;
             CamInterface.StartFrameGrab(0x8888);
         }
-        private void stopButton_Click(object sender, EventArgs e)
+        private void StopButton_Click(object sender, EventArgs e)
         {
             captureButton.Enabled = true;
             stopCaptureButton.Enabled = false;
             CamInterface.StopFrameGrab();
         }
 
-        private void gbImageCapture_Enter(object sender, EventArgs e)
+        private void GbImageCapture_Enter(object sender, EventArgs e)
         {
 
         }
 
-        private void folderBrowserOpen_Click(object sender, EventArgs e)
+        private void FolderBrowserOpen_Click(object sender, EventArgs e)
         {
             DialogResult dr = folderBrowserDialog1.ShowDialog();
             Console.WriteLine(dr.ToString());
@@ -350,12 +360,12 @@ namespace CCDApp
             }
         }
 
-        private void saveDirectoryChanged(object sender, EventArgs e)
+        private void SaveDirectoryChanged(object sender, EventArgs e)
         {
             CamInterface.path = folderTextBox.Text;
         }
 
-        private void captureActivate_Click(object sender, EventArgs e)
+        private void CaptureActivate_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < cameraActivationList.Items.Count; i++)
             {
@@ -366,7 +376,7 @@ namespace CCDApp
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             TriggerConfigurationWindow tcw = new TriggerConfigurationWindow();
             tcw.Show();
